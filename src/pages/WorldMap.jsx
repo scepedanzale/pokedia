@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { urlRegions } from "../config/config";
+import Breadcrumb from "../components/Breadcrumb";
 
 
 export default function WorldMap() {
-
+    const location = useLocation();
     const [regions, setRegions] = useState([]);
 
     useEffect(() => {
@@ -22,10 +23,12 @@ export default function WorldMap() {
     return (
         <>
             <div id="world-map-wrapper">
+                <Breadcrumb path={location.pathname} />
                 <img src="/imgs/world_map.jpeg" alt="" />
                 {regions && regions.map((region, index) => (
                     region.name !== 'hisui' &&
                     <Link
+                        to={`/regions/${region.name}`}
                         key={index}
                         className={`pin ${region.name}`}
                     >

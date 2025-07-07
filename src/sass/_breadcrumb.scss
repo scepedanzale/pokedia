@@ -1,0 +1,19 @@
+
+.breadcrumb{
+    margin-bottom: 2em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    .slug{
+        text-transform: uppercase;
+        font-size: 0.9em;
+        &:hover{
+        text-decoration: underline;
+    }}
+
+    .slug.active{
+        color: var(--secondary-color);
+        font-weight: 600;
+    }
+}

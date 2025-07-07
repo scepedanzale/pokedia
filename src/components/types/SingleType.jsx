@@ -5,7 +5,6 @@ import { urlTypes } from '../../config/config';
 import { typeImages } from '../../config/types';
 import { Capitalize, formatString } from '../../functions/functions';
 import PokemonList from '../pokemon/PokemonList';
-import NotFoundPage from '../../pages/NotFound';
 import Loader from '../Loader';
 import Error from '../Error';
 

@@ -22,7 +22,7 @@ export default function Navbar() {
           <Link to="/"><img src="/icons/pugno.png" alt="" /><span>Moves</span></Link>
         </li>
         <li>
-          <Link to="/world"><img src="/icons/region.png" alt="" /><span>Regions</span></Link>
+          <Link to="/regions"><img src="/icons/region.png" alt="" /><span>Regions</span></Link>
         </li>
         <li>
           <Link to="/"><img src="/icons/age.png" alt="" /><span>Generations</span></Link>
