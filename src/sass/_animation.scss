@@ -14,8 +14,16 @@
 
 
 /* Pokeball loader */
-
-#pokeball_loader{
+.pokeball-loader-wrapper{
+    width: 100%;
+    display: flex;
+    display: flex;
+    justify-content: center;
+}
+#pokeball-loader{
+    width: 100%;
+    max-width: 60px;
+    text-align: center;
     animation: pokeballLoader 1.3s linear infinite;
 }
 
