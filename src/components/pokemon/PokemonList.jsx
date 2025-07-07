@@ -7,7 +7,7 @@ import SearchPokemon from './SearchPokemon';
 import Loader from '../Loader';
 import Error from '../Error';
 
-export default function PokemonList() {
+export default function PokemonList({ pokemonListProp }) {
 
     const [scrollY, setScrollY] = useState(window.scrollY);
     const [loader, setLoader] = useState(false);
@@ -72,26 +72,37 @@ export default function PokemonList() {
 
     useEffect(() => {
         setLoader(true);
-        const stored = getWithExpiry('pokemonList');
-        if (stored) {
-            setPokemonList(stored);
-            setVisiblePokemon(stored.slice(0, numPokemon));
+        if(pokemonListProp?.length>0){
+            setPokemonList(pokemonListProp);
+            setVisiblePokemon(pokemonListProp.slice(0, numPokemon));
             setLoader(false);
-        } else {
-            axios.get(urlAllPokemon + '?limit=10000')
-                .then(res => {
-                    setPokemonList(res.data.results);
-                    setVisiblePokemon(res.data.results.slice(0, numPokemon));
-                    saveWithExpiry('pokemonList', res.data.results);
-                    setLoader(false);
-                })
-                .catch(error => {
-                    console.error(error);
-                    setLoader(false);
-                    setError(true);
-                });
+        }else{
+            const stored = getWithExpiry('pokemonList');
+            if (stored) {
+                setPokemonList(stored);
+                setVisiblePokemon(stored.slice(0, numPokemon));
+                setLoader(false);
+            } else {
+                axios.get(urlAllPokemon + '?limit=10000')
+                    .then(res => {
+                        setPokemonList(res.data.results);
+                        setVisiblePokemon(res.data.results.slice(0, numPokemon));
+                        saveWithExpiry('pokemonList', res.data.results);
+                        setLoader(false);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        setLoader(false);
+                        setError(true);
+                    });
+            }
         }
     }, []);
+
+    useEffect(()=>{
+        console.log(visiblePokemon)
+        console.log(pokemonList)
+    }, [visiblePokemon, pokemonList])
 
 
     const loadMorePokemon = () => {
@@ -105,13 +116,18 @@ export default function PokemonList() {
 
     return (
         <>
+        <div className='controller-pokemon-list'>
             <SearchPokemon pokemonList={pokemonList} onChange={setVisiblePokemon} setError={setError} setLoader={setLoader}/>
+            <div id="pokemon-filters">
+
+            </div>
+        </div>
             {loader && <Loader />}
             {error && <Error />}
             <div id="top"></div>
             <div id='pokemon-list'>
                 {visiblePokemon && visiblePokemon.map((p, index) => (
-                    <PokemonCard key={index} pokemon={p} />
+                    <PokemonCard key={index} pokemon={p?.pokemon ?? p} />
                 ))}
             </div>
             {pokemonList &&

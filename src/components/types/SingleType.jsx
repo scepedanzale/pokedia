@@ -4,6 +4,7 @@ import axios from 'axios';
 import { urlTypes } from '../../config/config';
 import { typeImages } from '../../config/types';
 import { Capitalize, formatString } from '../../functions/functions';
+import PokemonList from '../pokemon/PokemonList';
 
 export default function SingleType() {
 
@@ -65,6 +66,7 @@ export default function SingleType() {
             {/* pokemon */}
             <div className='pokemon-list'>
                 <h2 className={`text-${type.name}`}>Pokémon</h2>
+                <PokemonList pokemonListProp={type?.pokemon}/>
                 <div className='badge-list'>
                     {type?.pokemon.map((p, index) => (
                         index < 30 &&

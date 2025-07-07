@@ -12,6 +12,7 @@ export const pokemonId = (id) => {
   }
 }
 
+
 // iniziale maiuscola e spazio tra i nomi
 export const Capitalize = (pokemonName) => {
   if (pokemonName) {
@@ -27,7 +28,6 @@ export const Capitalize = (pokemonName) => {
     return finalName
   }
 }
-
 
 
 // calcolo statistiche
