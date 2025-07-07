@@ -3,20 +3,34 @@
     width: 100%;
     display: flex;
     justify-content: end;
+    position: sticky;
+    top: 80px;
+    z-index: 5;
     input{
         border: 1px solid var(--secondary-color);
         border-radius: 5px;
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
         width: 100%;
         max-width: 400px;
         padding: 5px;
+        transition: width 0.3s ease, padding 0.4s ease, border 0.4s ease;
+        height: 40px;
     }
     span{
         line-height: 0;
         font-size: 1.5em;
         border-radius: 5px;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        height: 40px;
+        transition: all 0.3s ease;
     }
+}
+
+input.collapse{
+    width: 0;
+    padding: 0;
+    border: 0;
+}
+span.collapse{
+    width: 0;
+    padding: 0;
+    overflow: hidden;
 }

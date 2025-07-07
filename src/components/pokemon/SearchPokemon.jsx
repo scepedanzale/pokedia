@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 
 export default function SearchPokemon({ onChange, pokemonList, setError, setLoader }) {
@@ -26,14 +26,24 @@ export default function SearchPokemon({ onChange, pokemonList, setError, setLoad
     }
   }, [input, pokemonList]);
 
+  const inputField = useRef();
+
+  const handleInputCollapse = () => {
+    inputField.current?.classList.toggle('collapse');
+  }
+
+
   return (
     <div className="search-container">
       <input
+        ref={inputField}
         type="search"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        className={`${window.scrollY > 50 ? 'collapse' :''}`}
+        placeholder="Search Pokémon..."
       />
-      <span className="button">
+      <span className={`button ${window.scrollY <= 50 ? 'collapse' : ''}`} onClick={handleInputCollapse}>
         <IoIosSearch />
       </span>
     </div>
