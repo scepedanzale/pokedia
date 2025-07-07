@@ -1,0 +1,22 @@
+
+.search-container{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    input{
+        border: 1px solid var(--secondary-color);
+        border-radius: 5px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        width: 100%;
+        max-width: 400px;
+        padding: 5px;
+    }
+    span{
+        line-height: 0;
+        font-size: 1.5em;
+        border-radius: 5px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+}

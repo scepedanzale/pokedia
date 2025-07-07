@@ -1,0 +1,261 @@
+/* Pokemon List */
+
+#pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    margin: 2em 0;
+}
+
+// single card
+.pokemon-card {
+    width: 100%;
+    max-width: 200px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        img {
+            transform: scale(1.2);
+            animation: pokemonSelected 0.8s linear infinite;
+        }
+
+        .pokemon-card__text {
+            opacity: 1;
+        }
+    }
+
+    img {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .pokemon-card__text {
+        opacity: 0;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 5px;
+        background-color: #00000046;
+        backdrop-filter: blur(2px);
+        transition: all 0.3s ease;
+
+        span {
+            font-size: 0.8em;
+        }
+    }
+}
+
+
+
+/* Single Pokémon page */
+
+#pokemon-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .images {
+        margin: 0 auto;
+        width: fit-content;
+        position: relative;
+        border-radius: 30%;
+    }
+
+    #pokemon-img {
+        max-width: 400px;
+    }
+
+    #pokemon-gif {
+        max-width: 50px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+}
+
+#pokemon-info {
+    position: relative;
+    margin-top: 1em;
+
+    .pokemon-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .cry-button {
+            background-color: transparent;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+
+            &:hover {
+                filter: brightness(0.9);
+            }
+        }
+    }
+
+    // nome
+    .pokemon-info {
+        margin: 1em 0 2em;
+    }
+
+    .pokemon-profile {
+        font-size: 0.8em;
+        backdrop-filter: brightness(0.9);
+        padding: 1em;
+        margin-top: 1em;
+    }
+}
+
+@media (min-width: 768px) {
+    #pokemon-page header {
+        display: flex;
+        justify-content: start;
+        gap: 1em;
+
+        .images {
+            margin: 0;
+        }
+    }
+
+}
+
+// stats
+
+#stats {
+    margin: 2em 0;
+}
+
+.progress {
+    padding: 4px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.43),
+        0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar {
+    height: 4px;
+    border-radius: 30px;
+    background-image: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.3),
+            rgba(255, 255, 255, 0.05));
+}
+
+// forms
+#forms div {
+    display: flex;
+    flex-direction: column;
+
+    a {
+        width: max-content;
+    }
+}
+
+// evolutions
+#evolutions-container {
+    margin: 1em 0;
+}
+
+#evolutions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.evolution-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .evolution {
+        display: inline-block;
+
+        &:hover img {
+            animation: pokemonSelected 0.8s linear infinite;
+        }
+    }
+
+    >div {
+        font-size: 0.8em;
+        margin-top: 1em;
+    }
+}
+
+.evolution-selected {
+    border-radius: 1em;
+}
+
+@media (min-width: 768px) {
+    #evolutions {
+        flex-direction: row;
+        justify-content: center;
+        gap: 3em;
+    }
+}
+
+// Abilities
+#abilities {
+    .ability {
+        margin-bottom: 1em;
+    }
+
+    .ability-name {
+        text-transform: uppercase;
+    }
+}
+
+// prev e next pokemon 
+
+#pre-next-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.prev,
+.next {
+    display: flex;
+    align-items: center;
+    font-size: 0.8em;
+}
+
+
+#more-info {
+    #controller {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5em;
+
+        span {
+            cursor: pointer;
+        }
+
+        span.active {
+            font-weight: bold;
+        }
+    }
+
+    #order-btn {
+        border-width: 1px;
+        border-radius: 2px;
+        padding: 5px;
+        margin: 10px 0;
+        cursor: pointer;
+    }
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+    }
+}

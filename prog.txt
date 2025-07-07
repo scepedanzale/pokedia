@@ -1,0 +1,73 @@
+
+PokéApi
+
+--> HomePage
+--> Preferiti
+--> Pokémon
+    -> lista tutti Pokémon
+        - leggendari
+        - starter
+        - ordine alfabetico/numero
+    -> pagina pokémon singolo
+        - img
+        - num
+        - verso
+        - peso + altezza
+        - tipo
+        - debolezze
+        - evoluzioni
+        - versioni
+        - mosse
+        - regioni
+        - giochi
+        - livelli
+        - correlati per tipo
+        - pokémon precedente/successivo
+        - chiamata alla specie : descrizione + habitat + leggendario + shape + capture_rate (probabilità cattura max 255)
+--> Tipi
+    -> lista tipi
+    -> pagina singolo tipo
+--> Mosse
+--> Regioni
+--> Generazioni
+--> Giochi
+--> Cerca
+
+
+
+
+-----------------------   chiamata singolo pokemon
+
+abilities: Elenca le abilità del Pokémon. Ogni abilità ha un nome, un URL per ulteriori dettagli, se è nascosta (is_hidden), e la posizione dello slot.
+
+base_experience: L'esperienza base ottenuta quando il Pokémon viene sconfitto.
+
+forms: Le forme alternative del Pokémon, se esistono.
+
+game_indices: Indici di gioco che collegano il Pokémon a specifiche versioni dei giochi Pokémon.
+
+height: L'altezza del Pokémon in decimetri.
+
+held_items: Oggetti che il Pokémon può tenere. In questo caso, è vuoto.
+
+id: L'ID unico del Pokémon.
+
+is_default: Indica se questa è la forma predefinita del Pokémon. (raichu è true mentre raichu di alola è false)
+
+location_area_encounters: URL per ottenere informazioni sulle aree dove il Pokémon può essere incontrato nei giochi.
+
+moves: Elenco delle mosse che il Pokémon può imparare, insieme ai dettagli su come e quando può impararle.
+
+name: Il nome del Pokémon.
+
+order: Numero di ordine del Pokémon (differente dall'ID).
+
+species: Informazioni sulla specie del Pokémon.
+
+sprites: URL delle immagini sprite del Pokémon in varie forme (frontale, posteriore, normale, shiny).
+
+stats: Le statistiche base del Pokémon (HP, Attacco, Difesa, ecc.).
+
+types: I tipi del Pokémon (ad esempio, Elettrico).
+
+weight: Il peso del Pokémon in ettogrammi.

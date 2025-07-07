@@ -1,0 +1,101 @@
+#list-types {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+
+    img {
+        min-width: 60px;
+        max-width: 60px;
+    }
+}
+
+/* Page single type */
+
+#type-page {
+    position: relative;
+
+    img {
+        max-width: 400px;
+        height: max-content;
+    }
+
+    h1 {
+        margin-bottom: 1em;
+    }
+
+    header ul li {
+        margin-bottom: 1em;
+
+        div {
+            margin-left: 1em;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    #type-page header {
+        display: flex;
+
+        gap: 2em;
+    }
+}
+
+/* COLORI in base al tipo */
+
+.type {
+    cursor: pointer;
+    padding: 3px 1em;
+    border-radius: 5px;
+
+    &:hover {
+        filter: brightness(0.9);
+    }
+}
+
+
+$types: (
+    bug: #9F9F28,
+    dark: #4F4747,
+    dragon: #576FBC,
+    electric: #DFBC28,
+    fairy: #E18CE1,
+    fighting: #E49021,
+    fire: #E4613E,
+    flying: #74AAD0,
+    ghost: #6F4570,
+    grass: #439837,
+    ground: #A4733C,
+    ice: #47C8C8,
+    normal: #828282,
+    poison: #9354CB,
+    psychic: #E96C8C,
+    rock: #A9A481,
+    steel: #71ACC6,
+    water: #3099E1,
+    unknown: #669D8D,
+    shadow: #5F4E81
+);
+
+@mixin generate-color-classes($type, $color) {
+    .#{$type} {
+        background-color: $color;
+        color: white;
+    }
+
+    .text-#{$type} {
+        color: $color;
+    }
+
+    .border-#{$type} {
+        border: 1px solid $color;
+    }
+}
+
+@each $type, $color in $types {
+    @include generate-color-classes($type, $color);
+}

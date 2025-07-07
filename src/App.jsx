@@ -1,0 +1,31 @@
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import NotFoundPage from './pages/NotFound';
+import SinglePokemon from './pages/SinglePokemon';
+import Types from './pages/Types';
+import Navbar from './components/Navbar';
+import SingleType from './components/types/SingleType';
+
+function App() {
+
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/pokemon/:id' element={<SinglePokemon />} />
+          <Route path='/types' element={<Types />} />
+          <Route path='/types/:type_name' element={<SingleType />} />
+          {/* <Route path='/search' element={<SearchPage/>}/>
+              <Route path='/favourites' element={<FavouritePage/>}/>
+              <Route path='/type/:name' element={<SingleTypePage/>}/> */}
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
+  )
+}
+
+export default App

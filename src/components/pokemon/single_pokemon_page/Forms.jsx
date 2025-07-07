@@ -1,0 +1,41 @@
+import { useEffect, useState } from 'react'
+import { Capitalize } from '../../../functions/functions'
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+
+export default function Forms({ currentPokemon, specie }) {
+
+    const [forms, setForms] = useState([]);
+
+    useEffect(() => {
+        if (specie.varieties) {
+            const fetchPokemonForms = async () => {
+                try {
+                    const requests = specie.varieties.map(variety =>
+                        axios(variety.pokemon.url).then(response => (response.data))
+                    );
+
+                    const results = await Promise.all(requests);
+                    setForms(results);
+                } catch (error) {
+                    console.error("Error fetching Pokémon forms:", error);
+                }
+            };
+            fetchPokemonForms();
+        }
+    }, [specie]);
+
+
+    return (
+        <section id='forms'>
+            <h2>Forms</h2>
+            <div>
+                {forms && forms.map((singlePokemon) => (
+                    <Link to={`/pokemon/ ${singlePokemon.id}`} state={{ singlePokemon }} key={singlePokemon.id} className={`${(singlePokemon?.name === currentPokemon?.name) && 'text-' + currentPokemon?.types[0].type.name}`}>
+                        {Capitalize(singlePokemon?.name)} {singlePokemon.is_default && '(forma predefinita)'}
+                    </Link>
+                ))}
+            </div>
+        </section>
+    )
+}

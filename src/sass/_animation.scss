@@ -1,0 +1,44 @@
+
+/* Pokemon card animation */
+@keyframes pokemonSelected {
+    0%{
+        transform: translateY(0em);
+    }
+    50%{
+        transform: translateY(-1.5em);
+    }
+    100%{
+        transform: translateY(0em);
+    }
+}
+
+
+/* Pokeball loader */
+
+#pokeball_loader{
+    animation: pokeballLoader 1.3s linear infinite;
+}
+
+@keyframes pokeballLoader{
+    0%{
+        transform: translateY(0em);
+    }
+    15%{
+        transform: translateY(-1.7em);
+    }
+    35%{
+        transform: translateY(0em);
+    }
+    45%{
+        transform: translateY(-1em);
+    }
+    60%{
+        transform: translateY(0em);
+    }
+    70%{
+        transform: translateY(-0.5em);
+    }
+    80%{
+        transform: translateY(0em);
+    }
+}

@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+@import 'animation';
+@import 'navbar';
+@import 'types';
+@import 'single_pokemon';
+@import 'search';
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%;
+}
+
+section {
+    width: 100%;
+    max-width: 992px;
+    margin-bottom: 2em;
+    margin: auto;
+}
+
+h1{
+    font-size: 2em;
+}
+h2 {
+    font-size: 1.3em;
+    margin-bottom: 0.7em;
+}
+
+:root {
+    --text-color: #1d1d1d;
+    --bg-color: #f2f2f2;
+    --primary-color: #1c4054;
+    --secondary-color: #e6b260;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body,
+#root {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+main {
+    padding: 80px 30px;
+}
+
+@media (min-width: 768px) {
+    main {
+        padding: 80px;
+        padding-right: 20px;
+    }
+}
+
+/* Custom classes */
+.button {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    width: max-content;
+    border-radius: 10px;
+    border: 0;
+    padding: 0.3em;
+    letter-spacing: 1px;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(0.9);
+    }
+}
+
+// badge
+.badge-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.badge {
+    backdrop-filter: brightness(0.9);
+    width: max-content;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+}

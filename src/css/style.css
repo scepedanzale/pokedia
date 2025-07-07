@@ -1,0 +1,435 @@
+/* NAVBAR */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=VT323&display=swap");
+#nav-col {
+  z-index: 200;
+}
+
+nav {
+  background-color: white;
+  box-shadow: 1px 4px 1em rgba(0, 0, 0, 0.239);
+}
+
+.code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* COLORI in base al tipo */
+.type {
+  cursor: pointer;
+}
+
+.type:hover {
+  transform: scale(1, 1.1);
+}
+
+.bug {
+  background-color: #91A119;
+}
+
+.dark {
+  background-color: #615958;
+  color: white;
+}
+
+.dragon {
+  background-color: #5160E1;
+  color: white;
+}
+
+.electric {
+  background-color: #F7C033;
+}
+
+.fairy {
+  background-color: #E86FEF;
+}
+
+.fighting {
+  background-color: #EE7E33;
+}
+
+.fire {
+  background-color: #E73E33;
+  color: white;
+}
+
+.flying {
+  background-color: #81B9EF;
+}
+
+.ghost {
+  background-color: #704170;
+  color: white;
+}
+
+.grass {
+  background-color: #52A12B;
+  color: white;
+}
+
+.ground {
+  background-color: #915121;
+  color: white;
+}
+
+.ice {
+  background-color: #61D9FB;
+}
+
+.normal {
+  background-color: #A0A29F;
+  color: white;
+}
+
+.poison {
+  background-color: #9144CB;
+  color: white;
+}
+
+.psychic {
+  background-color: #E94579;
+  color: white;
+}
+
+.rock {
+  background-color: #B0AA81;
+}
+
+.steel {
+  background-color: #60A1B9;
+  color: white;
+}
+
+.water {
+  background-color: #2980F0;
+  color: white;
+}
+
+.unknown {
+  background-color: #669D8D;
+  color: white;
+}
+
+.shadow {
+  background-color: #5F4E81;
+  color: white;
+}
+
+.text-bug {
+  color: #91A119;
+}
+
+.text-dark {
+  color: #615958;
+}
+
+.text-dragon {
+  color: #5160E1;
+}
+
+.text-electric {
+  color: #F7C033;
+}
+
+.text-fairy {
+  color: #E86FEF;
+}
+
+.text-fighting {
+  color: #EE7E33;
+}
+
+.text-fire {
+  color: #E73E33;
+}
+
+.text-flying {
+  color: #81B9EF;
+}
+
+.text-ghost {
+  color: #704170;
+}
+
+.text-grass {
+  color: #52A12B;
+}
+
+.text-ground {
+  color: #915121;
+}
+
+.text-ice {
+  color: #61D9FB;
+}
+
+.text-normal {
+  color: #A0A29F;
+}
+
+.text-poison {
+  color: #9144CB;
+}
+
+.text-psychic {
+  color: #E94579;
+}
+
+.text-rock {
+  color: #B0AA81;
+}
+
+.text-steel {
+  color: #60A1B9;
+}
+
+.text-water {
+  color: #2980F0;
+}
+
+.text-unknown {
+  color: #669D8D;
+}
+
+.text-shadow {
+  color: #5F4E81;
+}
+
+.border-bug {
+  border: 0.6em solid #91A119;
+}
+
+.border-dark {
+  border: 0.6em solid #615958;
+}
+
+.border-dragon {
+  border: 0.6em solid #5160E1;
+}
+
+.border-electric {
+  border: 0.6em solid #F7C033;
+}
+
+.border-fairy {
+  border: 0.6em solid #E86FEF;
+}
+
+.border-fighting {
+  border: 0.6em solid #EE7E33;
+}
+
+.border-fire {
+  border: 0.6em solid #E73E33;
+}
+
+.border-flying {
+  border: 0.6em solid #81B9EF;
+}
+
+.border-ghost {
+  border: 0.6em solid #704170;
+}
+
+.border-grass {
+  border: 0.6em solid #52A12B;
+}
+
+.border-ground {
+  border: 0.6em solid #915121;
+}
+
+.border-ice {
+  border: 0.6em solid #61D9FB;
+}
+
+.border-normal {
+  border: 0.6em solid #A0A29F;
+}
+
+.border-poison {
+  border: 0.6em solid #9144CB;
+}
+
+.border-psychic {
+  border: 0.6em solid #E94579;
+}
+
+.border-rock {
+  border: 0.6em solid #B0AA81;
+}
+
+.border-steel {
+  border: 0.6em solid #60A1B9;
+}
+
+.border-water {
+  border: 0.6em solid #2980F0;
+}
+
+.border-unknown {
+  border: 0.6em solid #669D8D;
+}
+
+.border-shadow {
+  border: 0.6em solid #5F4E81;
+}
+
+#pokeball_loader {
+  animation: pokeballLoader 1.3s linear infinite;
+}
+
+@keyframes pokeballLoader {
+  0% {
+    transform: translateY(0em);
+  }
+  15% {
+    transform: translateY(-1.7em);
+  }
+  35% {
+    transform: translateY(0em);
+  }
+  45% {
+    transform: translateY(-1em);
+  }
+  60% {
+    transform: translateY(0em);
+  }
+  70% {
+    transform: translateY(-0.5em);
+  }
+  80% {
+    transform: translateY(0em);
+  }
+}
+/* CARD */
+.pokemon_card {
+  cursor: pointer;
+}
+.pokemon_card:hover .pokemon_card_img {
+  transform: scale(1.2);
+  animation: pokemonSelected 0.8s linear infinite;
+}
+.pokemon_card .pokemon_card_img {
+  width: 75%;
+  margin: 0 auto;
+}
+.pokemon_card .card-body {
+  padding: 0 1em;
+}
+
+/* card animation */
+@keyframes pokemonSelected {
+  0% {
+    transform: translateY(0em);
+  }
+  50% {
+    transform: translateY(-1.5em);
+  }
+  100% {
+    transform: translateY(0em);
+  }
+}
+/* SINGLE POKEMON PAGE */
+/* evolutions */
+.evolution-selected {
+  background-color: rgba(254, 201, 27, 0.5411764706);
+  border-radius: 1em;
+}
+
+.evolution:hover {
+  transform: scale(1.2);
+  animation: pokemonSelected 0.8s linear infinite;
+}
+
+/* statistiche */
+.progress {
+  padding: 4px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.43), 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progress-bar {
+  border-radius: 30px;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+}
+
+/* prev e next pokemon */
+.prev, .next {
+  border-top: none;
+  border-bottom-right-radius: 2em;
+  border-bottom-left-radius: 2em;
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.244);
+}
+.prev:hover, .next:hover {
+  box-shadow: 0 0 1em rgba(0, 0, 0, 0.53);
+}
+
+body {
+  background-color: rgb(255, 255, 255) !important;
+  user-select: none;
+}
+
+#root {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  html, body, #root, #main-container, #main-row, #nav-col, #main-col {
+    max-height: 100vh;
+  }
+  html, body, #root, #main-container {
+    position: fixed;
+  }
+  nav {
+    min-height: 100%;
+  }
+  #main-col {
+    min-height: 100vh;
+  }
+}
+@media screen and (max-width: 767px) {
+  html, body, #root, #main-container, #main-row {
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+  }
+  #main-row {
+    display: flex;
+    flex-direction: column;
+  }
+  #nav-col {
+    height: fit-content;
+  }
+}
+#main-col {
+  overflow: auto;
+  padding: 0 1em;
+}
+
+#nav-col {
+  position: sticky;
+  top: 0;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+/* HOMEPAGE */
+.home-card {
+  cursor: pointer;
+  box-shadow: 0em 0em 0.5em rgb(0, 0, 0);
+}
+.home-card:hover {
+  box-shadow: inset 0 0 1em rgba(0, 0, 0, 0.736);
+}/*# sourceMappingURL=style.css.map */
