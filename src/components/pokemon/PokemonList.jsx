@@ -72,11 +72,11 @@ export default function PokemonList({ pokemonListProp }) {
 
     useEffect(() => {
         setLoader(true);
-        if(pokemonListProp?.length>0){
+        if (pokemonListProp?.length > 0) {
             setPokemonList(pokemonListProp);
             setVisiblePokemon(pokemonListProp.slice(0, numPokemon));
             setLoader(false);
-        }else{
+        } else {
             const stored = getWithExpiry('pokemonList');
             if (stored) {
                 setPokemonList(stored);
@@ -99,7 +99,7 @@ export default function PokemonList({ pokemonListProp }) {
         }
     }, []);
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(visiblePokemon)
         console.log(pokemonList)
     }, [visiblePokemon, pokemonList])
@@ -116,12 +116,13 @@ export default function PokemonList({ pokemonListProp }) {
 
     return (
         <>
-        <div className='controller-pokemon-list'>
-            <SearchPokemon pokemonList={pokemonList} onChange={setVisiblePokemon} setError={setError} setLoader={setLoader}/>
-            <div id="pokemon-filters">
+            {!pokemonListProp && <SearchPokemon
+                pokemonList={pokemonList}
+                onChange={setVisiblePokemon}
+                setError={setError}
+                setLoader={setLoader}
+            />}
 
-            </div>
-        </div>
             {loader && <Loader />}
             {error && <Error />}
             <div id="top"></div>

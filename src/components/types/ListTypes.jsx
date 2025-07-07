@@ -13,6 +13,7 @@ export default function ListTypes() {
     axios(urlTypes)
       .then(response => {
         setAllTypes(response.data.results);
+        console.log(response.data)
       })
       .catch(e => {
         console.error(e)
@@ -24,7 +25,7 @@ export default function ListTypes() {
       {allTypes && allTypes.map((type, index) => (
         <Link to={`/types/${type.name}`}
           key={index}
-          state={type.url}
+          state={{urlType:type?.url, allTypes}}
           className={`text-${type.name}`}
         >
           <img src={typeImages[type.name]} />
