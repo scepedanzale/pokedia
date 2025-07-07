@@ -7,6 +7,7 @@ import Types from './pages/Types';
 import Navbar from './components/Navbar';
 import SingleType from './components/types/SingleType';
 import WorldMap from './pages/WorldMap';
+import SingleRegion from './pages/SingleRegion';
 
 function App() {
 
@@ -20,7 +21,8 @@ function App() {
           <Route path='/types' element={<Types />} />
           <Route path='/types/:type_name' element={<SingleType />} />
           <Route path="/types/:type_name/*" element={<NotFoundPage />} />
-          <Route path='/world' element={<WorldMap />} />
+          <Route path='/regions' element={<WorldMap />} />
+          <Route path='/regions/:region_name' element={<SingleRegion />} />
           {/* <Route path='/search' element={<SearchPage/>}/>
               <Route path='/favourites' element={<FavouritePage/>}/>
               <Route path='/type/:name' element={<SingleTypePage/>}/> */}

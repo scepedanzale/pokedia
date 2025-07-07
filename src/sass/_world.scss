@@ -46,6 +46,35 @@
     }
 }
 
+/* Region Page */
+
+#region-page{
+    header{
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+    }
+    img{
+        max-width: 300px;
+        height: auto;
+        border-radius: 1rem;
+        margin: auto;
+    }
+    .versions{
+        margin-top: 2em;
+    }
+    
+}
+@media (min-width: 576px){
+    #region-page header{
+        flex-direction: row;
+        img{
+            margin: 0;
+            max-width: 500px;
+        }
+    }
+}
+
 
 // regions pins
 
