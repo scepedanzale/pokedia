@@ -6,6 +6,7 @@ import SinglePokemon from './pages/SinglePokemon';
 import Types from './pages/Types';
 import Navbar from './components/Navbar';
 import SingleType from './components/types/SingleType';
+import WorldMap from './pages/WorldMap';
 
 function App() {
 
@@ -18,6 +19,8 @@ function App() {
           <Route path='/pokemon/:id' element={<SinglePokemon />} />
           <Route path='/types' element={<Types />} />
           <Route path='/types/:type_name' element={<SingleType />} />
+          <Route path="/types/:type_name/*" element={<NotFoundPage />} />
+          <Route path='/world' element={<WorldMap />} />
           {/* <Route path='/search' element={<SearchPage/>}/>
               <Route path='/favourites' element={<FavouritePage/>}/>
               <Route path='/type/:name' element={<SingleTypePage/>}/> */}

@@ -1,0 +1,115 @@
+
+
+#world-map-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: auto;
+
+    img {
+        width: 100%;
+    }
+
+    .pin {
+        background-color: white;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        border-radius: 10px;
+        padding: 2px;
+        font-size: 0.8em;
+        &:hover{
+            border: 1px solid var(--primary-color);
+        }
+    }
+
+    .pin-icon {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+    }
+
+    .pin-label {
+        order: 1;
+        display: none;
+    }
+}
+
+@media (min-width: 850px) {
+    #world-map-wrapper .pin-label {
+        display: block;
+    }
+}
+
+
+// regions pins
+
+.kanto {
+    top: 50%;
+    left: 65%;
+}
+
+.johto {
+    top: 50%;
+    left: 57%;
+}
+
+.hoenn {
+    top: 65%;
+    left: 58%;
+}
+
+.sinnoh {
+    top: 20%;
+    left: 50%;
+
+    .pin-icon {
+        order: 2;
+    }
+}
+
+.unova {
+    top: 67%;
+    left: 43%;
+}
+
+.kalos {
+    top: 25%;
+    left: 35%;
+
+    .pin-icon {
+        order: 2;
+    }
+}
+
+.alola {
+    top: 50%;
+    left: 87%;
+
+    .pin-icon {
+        order: 2;
+    }
+}
+
+.galar {
+    top: 20%;
+    left: 25%;
+
+    .pin-icon {
+        order: 2;
+    }
+}
+
+.paldea {
+    top: 45%;
+    left: 27%;
+
+    .pin-icon {
+        order: 2;
+    }
+}

@@ -6,6 +6,7 @@ export const urlSpecies = 'https://pokeapi.co/api/v2/pokemon-species/';
 
 export const urlTypes = 'https://pokeapi.co/api/v2/type/';
 
+export const urlRegions = 'https://pokeapi.co/api/v2/region/';
 
 /* 
 

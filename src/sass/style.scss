@@ -6,6 +6,7 @@
 @import 'types';
 @import 'single_pokemon';
 @import 'search';
+@import 'world';
 
 
 *,
@@ -73,6 +74,20 @@ main {
     main {
         padding: 80px;
         padding-right: 20px;
+    }
+}
+
+
+/* Error page */
+
+.not-found-page, .error-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    img{
+        width: 100%;
+        max-width: 200px;
     }
 }
 
