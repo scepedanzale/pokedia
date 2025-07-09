@@ -18,6 +18,29 @@
     padding: 0;
 }
 
+:root {
+    --text-color: #1d1d1d;
+    --bg-color: #f2f2f2;
+    --primary-color: #1c4054;
+    --secondary-color: #e6b260;
+    --font-title: "Bangers", system-ui;
+    --font-text: "Comic Neue", cursive;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body,
+#root {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
 a {
     text-decoration: none;
     color: var(--text-color);
@@ -38,32 +61,17 @@ section {
     margin: auto;
 }
 
-h1{
-    font-size: 2em;
+h1 {
+    font-size: 2.3rem;
+    font-family: var(--font-title);
+    letter-spacing: 2px;
 }
+
 h2 {
-    font-size: 1.3em;
+    font-family: var(--font-title);
+    letter-spacing: 2px;
+    font-size: 1.5em;
     margin-bottom: 0.7em;
-}
-
-:root {
-    --text-color: #1d1d1d;
-    --bg-color: #f2f2f2;
-    --primary-color: #1c4054;
-    --secondary-color: #e6b260;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body,
-#root {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Montserrat', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 
@@ -81,12 +89,14 @@ main {
 
 /* Error page */
 
-.not-found-page, .error-page{
+.not-found-page,
+.error-page {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1em;
-    img{
+
+    img {
         width: 100%;
         max-width: 200px;
     }
@@ -109,11 +119,12 @@ main {
 }
 
 // badge
-.badge-list{
+.badge-list {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
+
 .badge {
     backdrop-filter: brightness(0.9);
     width: max-content;
