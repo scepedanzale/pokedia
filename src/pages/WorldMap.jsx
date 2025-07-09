@@ -22,8 +22,9 @@ export default function WorldMap() {
     }, [])
     return (
         <>
+            {/* Ricerca region */}
+            <Breadcrumb path={location.pathname} />
             <div id="world-map-wrapper">
-                <Breadcrumb path={location.pathname} />
                 <img src="/imgs/world_map.jpeg" alt="" />
                 {regions && regions.map((region, index) => (
                     region.name !== 'hisui' &&

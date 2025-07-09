@@ -9,6 +9,7 @@
 
     img {
         width: 100%;
+        border-radius: 1rem;
     }
 
     .pin {
@@ -46,6 +47,7 @@
     }
 }
 
+
 /* Region Page */
 
 #region-page{
@@ -62,6 +64,10 @@
     }
     .versions{
         margin-top: 2em;
+        h2{
+            font-size: 2em;
+            margin-bottom: 0;
+        }
     }
     
 }
@@ -72,6 +78,15 @@
             margin: 0;
             max-width: 500px;
         }
+    }
+}
+
+// region locations
+
+#region-locations{
+    margin-top: 2em;
+    ul{
+        margin-bottom: 2em;
     }
 }
 
