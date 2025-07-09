@@ -7,6 +7,7 @@ import { Capitalize, formatString } from '../../functions/functions';
 import PokemonList from '../pokemon/PokemonList';
 import Loader from '../Loader';
 import Error from '../Error';
+import Breadcrumb from '../Breadcrumb';
 
 export default function SingleType() {
 
@@ -51,6 +52,7 @@ export default function SingleType() {
             {error && <Error />}
             {type?.pokemon &&
                 <section id='type-page'>
+                    <Breadcrumb path={location.pathname}/>
                     <header>
                         <img src={typeImg} />
 

@@ -69,7 +69,7 @@ export const genderRate = (num) => {
 export const formatString = (input) => {
   if (!input) return '';
   return input
-    .replace(/_/g, ' ')                    // underscore → spazio
+    .replace(/[_-]/g, ' ')                    // underscore → spazio
     .toLowerCase()                         // tutto minuscolo
     .replace(/^\w/, c => c.toUpperCase()); // prima lettera maiuscola
 }
