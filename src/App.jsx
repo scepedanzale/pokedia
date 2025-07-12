@@ -8,11 +8,13 @@ import Navbar from './components/Navbar';
 import SingleType from './components/types/SingleType';
 import WorldMap from './pages/WorldMap';
 import SingleRegion from './pages/SingleRegion';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Navbar />
       <main>
         <Routes>

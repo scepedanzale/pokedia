@@ -41,6 +41,22 @@ body,
     -moz-osx-font-smoothing: grayscale;
 }
 
+main {
+    padding: 80px 30px;
+    height: 100vh;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    main {
+        padding: 80px;
+        padding-right: 20px;
+    }
+}
 
 a {
     text-decoration: none;
@@ -55,7 +71,8 @@ img {
     width: 100%;
 }
 
-section, header {
+section,
+header {
     width: 100%;
     max-width: 992px;
     margin: 0 auto 3em;
@@ -74,17 +91,6 @@ h2 {
     margin-bottom: 0.7em;
 }
 
-
-main {
-    padding: 80px 30px;
-}
-
-@media (min-width: 768px) {
-    main {
-        padding: 80px;
-        padding-right: 20px;
-    }
-}
 
 
 /* Error page */
