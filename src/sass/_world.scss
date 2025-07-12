@@ -1,11 +1,10 @@
 
 
-#world-map-wrapper {
+#world-map {
     position: relative;
     display: flex;
     flex-direction: column;
     max-width: 1200px;
-    margin: auto;
 
     img {
         width: 100%;
@@ -42,7 +41,7 @@
 }
 
 @media (min-width: 850px) {
-    #world-map-wrapper .pin-label {
+    #world-map .pin-label {
         display: block;
     }
 }
