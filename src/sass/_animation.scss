@@ -50,3 +50,17 @@
         transform: translateY(0em);
     }
 }
+
+
+// scroll icon
+@keyframes scrollIcon {
+    20% {
+        top: 3px;
+        opacity: 1;
+    }
+
+    100% {
+        top: 80%;
+        opacity: 0;
+    }
+}

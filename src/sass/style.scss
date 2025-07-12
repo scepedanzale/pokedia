@@ -54,11 +54,10 @@ img {
     width: 100%;
 }
 
-section {
+section, header {
     width: 100%;
     max-width: 992px;
-    margin-bottom: 2em;
-    margin: auto;
+    margin: 0 auto 3em;
 }
 
 h1 {
