@@ -1,0 +1,52 @@
+
+/* Pokemon List */
+
+#pokemon-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1em;
+    margin: 2em 0;
+}
+
+// single card
+.pokemon-card {
+    width: 100%;
+    max-width: 200px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        img {
+            transform: scale(1.2);
+            animation: pokemonSelected 0.8s linear infinite;
+        }
+
+        .pokemon-card__text {
+            opacity: 1;
+        }
+    }
+
+    img {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .pokemon-card__text {
+        opacity: 0;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        padding: 5px;
+        background-color: #00000046;
+        backdrop-filter: blur(2px);
+        transition: all 0.3s ease;
+
+        span {
+            font-size: 0.8em;
+        }
+    }
+}

@@ -29,13 +29,11 @@ export default function Forms({ currentPokemon, specie }) {
     return (
         <section id='forms'>
             <h2>Forms</h2>
-            <div>
-                {forms && forms.map((singlePokemon) => (
-                    <Link to={`/pokemon/ ${singlePokemon.id}`} state={{ singlePokemon }} key={singlePokemon.id} className={`${(singlePokemon?.name === currentPokemon?.name) && 'text-' + currentPokemon?.types[0].type.name}`}>
-                        {Capitalize(singlePokemon?.name)} {singlePokemon.is_default && '(forma predefinita)'}
-                    </Link>
-                ))}
-            </div>
+            {forms && forms.map((singlePokemon) => (
+                <Link to={`/pokemon/ ${singlePokemon.id}`} state={{ singlePokemon }} key={singlePokemon.id} className={`${(singlePokemon?.name === currentPokemon?.name) && 'text-' + currentPokemon?.types[0].type.name}`}>
+                    {Capitalize(singlePokemon?.name)} {singlePokemon.is_default && '(forma predefinita)'}
+                </Link>
+            ))}
         </section>
     )
 }

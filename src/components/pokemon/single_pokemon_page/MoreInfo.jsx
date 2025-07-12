@@ -14,7 +14,6 @@ export default function MoreInfo({ currentPokemon }) {
     const getItemName = (item) => {
         if (selected === 'moves') return item.move?.name || '';
         if (selected === 'games') return item.version?.name || '';
-        if (selected === 'locations') return item.location_area?.name || '';
         return '';
     };
 
@@ -27,49 +26,10 @@ export default function MoreInfo({ currentPokemon }) {
             data = currentPokemon?.moves || [];
         } else if (info === 'games') {
             data = currentPokemon?.game_indices || [];
-        } else if (info === 'locations') {
-            try {
-                const response = await axios.get(currentPokemon?.location_area_encounters);
-                data = response.data || [];
-                handleLocation(data)
-                console.log(response.data);
-            } catch (error) {
-                data = [];
-            }
-        }
+        } 
 
         setDefaultOrder(data);
         setAbcOrder([...data].sort((a, b) => getItemName(a).localeCompare(getItemName(b))));
-    }
-
-    const handleLocation = (data) => {
-        data.forEach(el=>{
-            console.log(el.location_area)
-            fetchLocation(el.location_area.url)
-        })
-    }
-    /* Location */
-    const fetchLocation = (url) => {
-        try{
-            axios(url)
-            .then(response=>{
-                fetchLocationRegion(response.data.location.url)
-                console.log(response.data)
-            })
-        }catch(error){
-            console.log(error);
-        }
-    }
-    /* Region */
-    const fetchLocationRegion = (url) => {
-        try{
-            axios(url)
-            .then(response=>{
-                console.log(response.data.region.name)
-            })
-        }catch(error){
-            console.log(error);
-        }
     }
 
     useEffect(() => {
@@ -98,12 +58,6 @@ export default function MoreInfo({ currentPokemon }) {
                         onClick={() => handleMoreInfo('games')}
                     >
                         GAMES
-                    </span>
-                    <span
-                        className={selected === 'locations' && 'active'}
-                        onClick={() => handleMoreInfo('locations')}
-                    >
-                        LOCATIONS
                     </span>
                 </div>
 

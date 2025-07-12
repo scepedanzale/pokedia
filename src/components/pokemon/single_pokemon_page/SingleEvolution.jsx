@@ -44,13 +44,17 @@ export default function SingleEvolution({ evolution, currentPokemonName, numEvol
     return (
         singlePokemon &&
         <div className='evolution-container'>
-            <Link to={`/pokemon/${singlePokemon.id}`} state={{ singlePokemon }} className={`evolution ${singlePokemon.name === currentPokemonName ? 'evolution-selected ' + singlePokemon.types[0].type.name : ''}`}>
+            <Link
+                to={`/pokemon/${singlePokemon.id}`}
+                state={{ singlePokemon }}
+                className={`evolution ${singlePokemon.name === currentPokemonName ? 'evolution-selected ' + singlePokemon.types[0].type.name : ''}`}
+            >
                 <img
                     src={singlePokemon?.sprites?.front_default}
                     title={singlePokemon.name}
                 />
             </Link>
-            <div>
+            <div className='evolution-desc'>
                 {
                     numEvolution == 1 ?
                         <p className='italic'>{Capitalize(currentPokemonName)} non ha evoluzioni</p>

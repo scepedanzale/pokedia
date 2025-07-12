@@ -29,7 +29,7 @@ export default function Details({ currentPokemon, specie }) {
                         <AiOutlineSound />
                     </button>
                 </div>
-                <div className='pokemon-info'>
+                <div id='pokemon-identity'>
                     <h1>{Capitalize(currentPokemon?.name)}</h1>
                     {specie.genera && specie.genera.map((g, index) => (
                         <p key={index} className={`text-${currentPokemon?.types[0]?.type?.name}`}>{g.language.name == 'en' && g.genus}</p>
@@ -45,7 +45,7 @@ export default function Details({ currentPokemon, specie }) {
                         </Link>
                     ))}
             </div>
-            <div className='pokemon-profile'>
+            <div id='pokemon-profile'>
                 {/* peso e altezza */}
                 <p>Height: {currentPokemon.height * 10}cm</p>
                 <p>Weight: {currentPokemon.weight / 10}kg</p>
