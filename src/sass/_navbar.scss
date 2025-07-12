@@ -43,13 +43,17 @@ nav {
 
         li {
             display: none;
+            &:hover a{
+               color: var(--secondary-color);
+            }
             a {
                 display: flex;
                 align-items: center;
                 gap: 10px;
             }
 
-            img {
+            svg {
+                height: max-content;
                 max-width: 20px;
                 line-height: none;
             }
