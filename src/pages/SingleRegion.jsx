@@ -74,7 +74,7 @@ export default function SingleRegion() {
         const grouped = useMemo(() => groupLocations(locations), [locations]);
 
         return (
-            <div id='region-locations'>
+            <section id='region-locations'>
                 {CATEGORY_ORDER.map((category) => {
                     const items = grouped[category];
                     if (!items || items.length === 0) return;
@@ -89,7 +89,7 @@ export default function SingleRegion() {
                         </>
                     )
                 })}
-            </div>
+            </section>
         );
     }
 

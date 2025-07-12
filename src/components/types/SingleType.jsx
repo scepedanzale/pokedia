@@ -51,7 +51,7 @@ export default function SingleType() {
             {loader && <Loader />}
             {error && <Error />}
             {type?.pokemon &&
-                <section id='type-page'>
+                <div id='type-page'>
                     <Breadcrumb path={location.pathname}/>
                     <header>
                         <img src={typeImg} />
@@ -83,11 +83,11 @@ export default function SingleType() {
                     </header>
 
                     {/* pokemon */}
-                    <div className='pokemon-list'>
+                    <section>
                         <h2 className={`text-${type.name}`}>Pokémon</h2>
                         <PokemonList pokemonListProp={type?.pokemon} />
-                    </div>
-                </section>
+                    </section>
+                </div>
             }
         </>
     )

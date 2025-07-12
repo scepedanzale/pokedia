@@ -32,9 +32,12 @@ https://pokeapi.co/api/v2/machine/
 
 // habitat
 https://pokeapi.co/api/v2/pokemon-habitat/
-// location
-https://pokeapi.co/api/v2/location/
+
 // regions
 https://pokeapi.co/api/v2/region/
+// location: suddivisione della regione
+https://pokeapi.co/api/v2/location/
+// location-area: sottosezione della location
+https://pokeapi.co/api/v2/location-area/
 
 */
