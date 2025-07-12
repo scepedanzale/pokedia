@@ -13,8 +13,6 @@ export default function SingleEvolution({ evolution, currentPokemonName, numEvol
             axios(urlSinglePokemon + evolution.name)
                 .then(response => {
                     setSinglePokemon(response.data)
-                    console.log(response.data)
-                    console.log(evolution)
                 })
                 .catch(error => {
                     console.log(error)

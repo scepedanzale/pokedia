@@ -9,41 +9,79 @@ export default function MoreInfo({ currentPokemon }) {
     const [defaultOrder, setDefaultOrder] = useState([]);
     const [abcOrder, setAbcOrder] = useState([]);
 
-    const [order, setOrder] = useState('default')
+    const [order, setOrder] = useState('default');
+
+    const getItemName = (item) => {
+        if (selected === 'moves') return item.move?.name || '';
+        if (selected === 'games') return item.version?.name || '';
+        if (selected === 'locations') return item.location_area?.name || '';
+        return '';
+    };
 
     const handleMoreInfo = async (info) => {
-        setSelected(info)
+        setSelected(info);
+
+        let data = [];
+
         if (info === 'moves') {
-            setDefaultOrder(currentPokemon?.moves || 'Information not available')
+            data = currentPokemon?.moves || [];
         } else if (info === 'games') {
-            setDefaultOrder(currentPokemon?.game_indices || 'Information not available')
+            data = currentPokemon?.game_indices || [];
         } else if (info === 'locations') {
-            const response = await axios.get(currentPokemon?.location_area_encounters)
-            await setDefaultOrder(response.data || []);
-        }
-    }
-
-    const handleOrder = (value) => {
-        setOrder(value)
-    }
-
-    useEffect(() => {
-        if (order === 'abc') {
-            if (selected === 'moves') {
-                setAbcOrder([...defaultOrder].sort((a, b) => a.move.name.localeCompare(b.move.name)));
-            } else if (selected === 'games') {
-                setAbcOrder([...defaultOrder].sort((a, b) => a.version.name.localeCompare(b.version.name)));
-            } else if (selected === 'locations') {
-                setAbcOrder([...defaultOrder].sort((a, b) => a.location_area.name.localeCompare(b.location_area.name)));
+            try {
+                const response = await axios.get(currentPokemon?.location_area_encounters);
+                data = response.data || [];
+                handleLocation(data)
+                console.log(response.data);
+            } catch (error) {
+                data = [];
             }
         }
-    }, [order, defaultOrder, selected]);
 
+        setDefaultOrder(data);
+        setAbcOrder([...data].sort((a, b) => getItemName(a).localeCompare(getItemName(b))));
+    }
+
+    const handleLocation = (data) => {
+        data.forEach(el=>{
+            console.log(el.location_area)
+            fetchLocation(el.location_area.url)
+        })
+    }
+    /* Location */
+    const fetchLocation = (url) => {
+        try{
+            axios(url)
+            .then(response=>{
+                fetchLocationRegion(response.data.location.url)
+                console.log(response.data)
+            })
+        }catch(error){
+            console.log(error);
+        }
+    }
+    /* Region */
+    const fetchLocationRegion = (url) => {
+        try{
+            axios(url)
+            .then(response=>{
+                console.log(response.data.region.name)
+            })
+        }catch(error){
+            console.log(error);
+        }
+    }
 
     useEffect(() => {
-        handleMoreInfo('moves')
-        setSelected('moves')
+        handleMoreInfo('moves');
+        setSelected('moves');
     }, [currentPokemon])
+
+    const handleOrder = (value) => {
+        setOrder(value);
+    }
+
+    const displayedList = order === 'default' ? defaultOrder : abcOrder;
 
     return (
         <section id='more-info'>
@@ -79,14 +117,12 @@ export default function MoreInfo({ currentPokemon }) {
                 </button>
 
                 <div className='badge-list'>
-                    {(order === 'default' ? defaultOrder : abcOrder).map((element, index) => {
-                        const name =
-                            element.move?.name ||
-                            element.version?.name ||
-                            element.location_area?.name ||
-                            '';
-                        return <p key={index} className='badge'>{Capitalize(name)}</p>;
-                    })}
+                    {displayedList.length > 0 ? displayedList.map((element, index) => {
+                        return <p key={index} className='badge'>{Capitalize(getItemName(element))}</p>;
+                    })
+                        :
+                        'Information not avaible'
+                    }
                 </div>
 
             </div>

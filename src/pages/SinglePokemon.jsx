@@ -9,6 +9,7 @@ import Stats from '../components/pokemon/single_pokemon_page/Stats';
 import Forms from '../components/pokemon/single_pokemon_page/Forms';
 import PreNextPokemon from '../components/pokemon/single_pokemon_page/PreNextPokemon';
 import Evolutions from '../components/pokemon/single_pokemon_page/Evolutions';
+import LocationAreas from '../components/pokemon/single_pokemon_page/LocationAreas';
 
 
 export default function SinglePokemon() {
@@ -77,6 +78,10 @@ export default function SinglePokemon() {
 
       {/* Abilità */}
       <Abilities currentPokemon={currentPokemon} />
+
+      {/* Location Areas */}
+      <LocationAreas locationAreaEncountersUrl={currentPokemon.location_area_encounters}/>
+
 
       {/* More info: moves, games, location */}
       <MoreInfo currentPokemon={currentPokemon} />
