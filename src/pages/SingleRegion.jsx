@@ -5,6 +5,7 @@ import axios from 'axios';
 import { formatString } from '../functions/functions';
 import Breadcrumb from '../components/Breadcrumb';
 import { IoLogoGameControllerB } from "react-icons/io";
+import Wrapper from '../components/layout/Wrapper';
 
 
 
@@ -106,7 +107,7 @@ export default function SingleRegion() {
     }, [region_name])
 
     return (
-        <>
+        <Wrapper>
             {region?.version_groups &&
                 <div id="region-page">
                     <Breadcrumb path={location.pathname} />
@@ -123,7 +124,7 @@ export default function SingleRegion() {
                                 <h2><IoLogoGameControllerB /></h2>
                                 <ul>
                                     {region?.version_groups.map((ver, index) => (
-                                        <li key={index}>{ver.name}</li>
+                                        <li key={index}>{formatString(ver.name)}</li>
                                     ))}
                                 </ul>
                             </div>
@@ -133,6 +134,6 @@ export default function SingleRegion() {
                     <LocationList locations={region?.locations} />
                 </div>
             }
-        </>
+        </Wrapper>
     )
 }

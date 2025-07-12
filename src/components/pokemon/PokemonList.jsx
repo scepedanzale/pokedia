@@ -6,6 +6,7 @@ import PokemonCard from './PokemonCard';
 import SearchPokemon from './SearchPokemon';
 import Loader from '../Loader';
 import Error from '../Error';
+import Wrapper from '../layout/Wrapper';
 
 export default function PokemonList({ pokemonListProp }) {
 
@@ -115,7 +116,7 @@ export default function PokemonList({ pokemonListProp }) {
 
 
     return (
-        <>
+        <Wrapper>
             {!pokemonListProp && <SearchPokemon
                 pokemonList={pokemonList}
                 onChange={setVisiblePokemon}
@@ -144,6 +145,6 @@ export default function PokemonList({ pokemonListProp }) {
                     </button>
                 </>
             }
-        </>
+        </Wrapper>
     )
 }

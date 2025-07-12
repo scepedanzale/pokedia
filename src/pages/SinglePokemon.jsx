@@ -10,6 +10,8 @@ import Forms from '../components/pokemon/single_pokemon_page/Forms';
 import PreNextPokemon from '../components/pokemon/single_pokemon_page/PreNextPokemon';
 import Evolutions from '../components/pokemon/single_pokemon_page/Evolutions';
 import LocationAreas from '../components/pokemon/single_pokemon_page/LocationAreas';
+import Wrapper from '../components/layout/Wrapper';
+import SearchPokemon from '../components/pokemon/SearchPokemon';
 
 
 export default function SinglePokemon() {
@@ -51,41 +53,47 @@ export default function SinglePokemon() {
 
   return (
     currentPokemon?.name && specie &&
-    <div id='pokemon-page'>
-
-      {/* Prev and Next pokemon */}
+    <>
+      <Wrapper>
       <PreNextPokemon currentPokemon={currentPokemon} />
 
-      {/* Header */}
-      <header>
-        <div className={`images ${currentPokemon?.types[0]?.type?.name}`}>
-          <img id='pokemon-img' src={currentPokemon?.sprites?.other['official-artwork'].front_default} />
-          <img id='pokemon-gif' src={currentPokemon?.sprites?.other.showdown.front_default} />
+        <div id='pokemon-page'>
+
+          {/* Prev and Next pokemon */}
+
+          {/* Header */}
+          <header>
+            <div className={`images ${currentPokemon?.types[0]?.type?.name}`}>
+              <img id='pokemon-img' src={currentPokemon?.sprites?.other['official-artwork'].front_default} />
+              <img id='pokemon-gif' src={currentPokemon?.sprites?.other.showdown.front_default} />
+            </div>
+
+            {/* Specifiche */}
+            <Details currentPokemon={currentPokemon} specie={specie} />
+          </header>
+
+          {/* Statistiche */}
+          <Stats currentPokemon={currentPokemon} />
+
+          {/* Forme */}
+          <Forms specie={specie} currentPokemon={currentPokemon} />
+
+          {/* Evoluzioni */}
+          <Evolutions currentPokemon={currentPokemon} />
+
+          {/* Abilità */}
+          <Abilities currentPokemon={currentPokemon} />
+
+          {/* Location Areas */}
+          <LocationAreas locationAreaEncountersUrl={currentPokemon.location_area_encounters} />
+
+
+          {/* More info: moves, games, location */}
+          <MoreInfo currentPokemon={currentPokemon} />
+
         </div>
 
-        {/* Specifiche */}
-        <Details currentPokemon={currentPokemon} specie={specie} />
-      </header>
-
-      {/* Statistiche */}
-      <Stats currentPokemon={currentPokemon} />
-
-      {/* Forme */}
-      <Forms specie={specie} currentPokemon={currentPokemon} />
-
-      {/* Evoluzioni */}
-      <Evolutions currentPokemon={currentPokemon} />
-
-      {/* Abilità */}
-      <Abilities currentPokemon={currentPokemon} />
-
-      {/* Location Areas */}
-      <LocationAreas locationAreaEncountersUrl={currentPokemon.location_area_encounters}/>
-
-
-      {/* More info: moves, games, location */}
-      <MoreInfo currentPokemon={currentPokemon} />
-
-    </div>
+      </Wrapper>
+    </>
   )
 }

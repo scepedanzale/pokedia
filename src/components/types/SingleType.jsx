@@ -8,6 +8,7 @@ import PokemonList from '../pokemon/PokemonList';
 import Loader from '../Loader';
 import Error from '../Error';
 import Breadcrumb from '../Breadcrumb';
+import Wrapper from '../layout/Wrapper';
 
 export default function SingleType() {
 
@@ -16,7 +17,6 @@ export default function SingleType() {
     const location = useLocation();
 
     const urlType = location.state?.urlType || null;
-    const allTypes = location.state?.allTypes || [];
 
     const [type, setType] = useState({})
     const [typeImg, setTypeImg] = useState('')
@@ -47,7 +47,7 @@ export default function SingleType() {
 
 
     return (
-        <>
+        <Wrapper>
             {loader && <Loader />}
             {error && <Error />}
             {type?.pokemon &&
@@ -89,6 +89,6 @@ export default function SingleType() {
                     </section>
                 </div>
             }
-        </>
+        </Wrapper>
     )
 }

@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { urlRegions } from "../config/config";
 import Breadcrumb from "../components/Breadcrumb";
 import Map from "../components/Map";
+import Wrapper from "../components/layout/Wrapper";
 
 
 export default function WorldMap() {
@@ -22,11 +23,11 @@ export default function WorldMap() {
         }
     }, [])
     return (
-        <>
+        <Wrapper>
             {/* Ricerca region */}
             <Breadcrumb path={location.pathname} />
             <Map regions={regions}/>
             <p>Mappa non ufficiale che unifica le regioni descritte nel mondo Pokémon.</p>
-        </>
+        </Wrapper>
     )
 }

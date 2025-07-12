@@ -5,6 +5,7 @@ import { urlTypes } from '../../config/config'
 import { typeImages } from '../../config/types';
 import { Capitalize } from '../../functions/functions';
 import Breadcrumb from '../Breadcrumb';
+import Wrapper from '../layout/Wrapper';
 
 export default function ListTypes() {
 
@@ -22,20 +23,24 @@ export default function ListTypes() {
   }, [])
 
   return (
-    <section>
+    <Wrapper>
       <Breadcrumb path={location.pathname} />
-      <div id='list-types'>
-        {allTypes && allTypes.map((type, index) => (
-          <Link to={`/types/${type.name}`}
-            key={index}
-            state={{ urlType: type?.url, allTypes }}
-            className={`text-${type.name}`}
-          >
-            <img src={typeImages[type.name]} />
-            <p>{Capitalize(type.name)}</p>
-          </Link>
-        ))}
-      </div>
-    </section>
+
+      <section>
+        <div id='list-types'>
+          {allTypes && allTypes.map((type, index) => (
+           (type.name !== 'unknown' && type.name !== 'stellar') &&
+            <Link to={`/types/${type.name}`}
+              key={index}
+              state={{ urlType: type?.url, allTypes }}
+              className={`text-${type.name}`}
+            >
+              <img src={typeImages[type.name]} />
+              <p>{Capitalize(type.name)}</p>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </Wrapper>
   )
 }
