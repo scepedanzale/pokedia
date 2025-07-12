@@ -1,21 +1,23 @@
 /* Prev and Next pokemon */
 
 #pre-next-buttons {
-    display: flex;
-    justify-content: space-between;
     width: 100%;
     margin-bottom: 1em;
     position: sticky;
-    top: 0;
+    top: 80px;
     z-index: 10;
+    .prev,
+    .next {
+        display: inline-block;
+        align-items: center;
+        font-size: 0.8em;
+    }
+    .next{
+        position: absolute;
+        right: 0;
+    }
 }
 
-.prev,
-.next {
-    display: flex;
-    align-items: center;
-    font-size: 0.8em;
-}
 
 
 /* Single Pokémon page */

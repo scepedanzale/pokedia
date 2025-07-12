@@ -40,13 +40,19 @@ export default function PreNextPokemon({ currentPokemon }) {
 
     return (
         <div id='pre-next-buttons'>
-            <Link to={`/pokemon/${prev.id}`} className='prev button'>
-                <IoIosArrowBack />
-                <span>#{pokemonId(prev.id)}</span>
-            </Link>
+            {currentPokemon.id !== 1 &&
+                <Link to={`/pokemon/${prev.id}`} className='prev button'>
+                    <div className='flex'>
+                        <IoIosArrowBack />
+                        <span>#{pokemonId(prev.id)}</span>
+                    </div>
+                </Link>
+            }
             <Link to={`/pokemon/${next.id}`} className='next button'>
-                <span>#{pokemonId(next.id)}</span>
-                <IoIosArrowForward />
+                <div className='flex'>
+                    <span>#{pokemonId(next.id)}</span>
+                    <IoIosArrowForward />
+                </div>
             </Link>
         </div>
     )
