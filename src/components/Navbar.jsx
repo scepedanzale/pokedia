@@ -1,8 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { TbPokeball } from "react-icons/tb";
 import logo from '../imgs/logo.png'
 
 export default function Navbar() {
+
+  const location = useLocation();
+
 
   return (
     <nav>
@@ -13,7 +16,7 @@ export default function Navbar() {
       <input type="checkbox" id='toggle-menu' />
       <ul>
         <li>
-          <Link to="/">
+          <Link to="/" className={location.pathname == '/' && 'active'}>
             <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none" stroke="currentColor" >
 
               <g id="SVGRepo_bgCarrier" strokeWidth="0" />
@@ -27,7 +30,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/types">
+          <Link to="/types" className={location.pathname.includes('types') && 'active'}>
             <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2">
 
               <g id="SVGRepo_bgCarrier" strokeWidth="0" />
@@ -40,7 +43,7 @@ export default function Navbar() {
             <span>Types</span></Link>
         </li>
         <li>
-          <Link to="/">
+          <Link to="/" className={location.pathname.includes('moves') && 'active'}>
             <svg
               width='64px'
               height='64px'
@@ -114,7 +117,7 @@ export default function Navbar() {
             <span>Moves</span></Link>
         </li>
         <li>
-          <Link to="/regions">
+          <Link to="/regions" className={location.pathname.includes('regions') && 'active'}>
             <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none" stroke="currentColor">
 
               <g id="SVGRepo_bgCarrier" strokeWidth="0" />
@@ -127,7 +130,7 @@ export default function Navbar() {
             <span>Regions</span></Link>
         </li>
         <li>
-          <Link to="/">
+          <Link to="/" className={location.pathname.includes('generations') && 'active'}>
             <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2">
 
               <g id="SVGRepo_bgCarrier" strokeWidth="0" />
@@ -140,7 +143,7 @@ export default function Navbar() {
             <span>Generations</span></Link>
         </li>
         <li>
-          <Link to="/">
+          <Link to="/" className={location.pathname.includes('games') && 'active'}>
             <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" height="64px" width="64px" version="1.1" id="_x32_" viewBox="0 0 512 512" xmlSpace="preserve" fill="currentColor" stroke="currentColor">
 
               <g id="SVGRepo_bgCarrier" strokeWidth="0" />
@@ -153,7 +156,7 @@ export default function Navbar() {
             <span>Games</span></Link>
         </li>
         <li className='button'>
-          <Link to="/favourites">
+          <Link to="/favourites" className={location.pathname.includes('favourites') && 'active'}>
             <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none" stroke="currentColor">
 
               <g id="SVGRepo_bgCarrier" strokeWidth="0" />
