@@ -27,7 +27,7 @@ export default function SingleLocation() {
                 .then(response => {
                     setSingleLocation(response.data);
                     fetchAreas(response.data.areas);
-                    
+                    setLoader(false);
                 })
         } catch (error) {
             console.error(error);
@@ -42,7 +42,6 @@ export default function SingleLocation() {
                 .then(response => {
                     console.log(response.data)
                     setPokemonLocation(response.data.pokemon_encounters);
-                    setLoader(false);
                 })
                 .catch(error => {
                     console.error(error)
@@ -55,32 +54,35 @@ export default function SingleLocation() {
             {singleLocation.names &&
                 <div id="location-page">
                     <Breadcrumb path={location.pathname} />
-                    {loader && <Loader />}
-                    {error && <Error />}
-                    <header>
-                        <h1>{formatString(location_name)}</h1>
-                        <p>{formatString(singleLocation.region.name)}</p>
-                    </header>
+                    {loader ? <Loader /> :
+                        error ? <Error /> :
+                            <>
+                                <header>
+                                    <h1>{formatString(location_name)}</h1>
+                                    <p>{formatString(singleLocation.region.name)}</p>
+                                </header>
 
-                    <section>
-                        <h2>Areas</h2>
-                        <ul className="badge-list">
-                            {singleLocation?.areas.map((area, index) => (
-                                <li key={index} className="badge">{formatString(area.name)}</li>
-                            ))}
-                        </ul>
-                    </section>
+                                <section>
+                                    <h2>Areas</h2>
+                                    <ul className="badge-list">
+                                        {singleLocation?.areas.map((area, index) => (
+                                            <li key={index} className="badge">{formatString(area.name)}</li>
+                                        ))}
+                                    </ul>
+                                </section>
 
-                    <section>
-                        <h2>Pokemon</h2>
-                        {loader ? <Loader />
-                            :
-                            pokemonLocation.length > 0
-                                ? <PokemonList pokemonListProp={pokemonLocation} />
-                                :
-                                <p>Non si trovano Pokémon in questa location.</p>
-                        }
-                    </section>
+                                <section>
+                                    <h2>Pokemon</h2>
+                                    {loader ? <Loader />
+                                        :
+                                        pokemonLocation.length > 0
+                                            ? <PokemonList pokemonListProp={pokemonLocation} />
+                                            :
+                                            <p>Non si trovano Pokémon in questa location.</p>
+                                    }
+                                </section>
+                            </>
+                    }
                 </div>
             }
         </Wrapper>
