@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { urlRegions } from '../config/config';
 import axios from 'axios';
 import { formatString } from '../functions/functions';
@@ -84,7 +84,11 @@ export default function SingleRegion() {
                             <h2 key={category}>{category}</h2>
                             <ul className='badge-list'>
                                 {items?.sort().map((item) => (
-                                    <li key={item} className='badge'>{formatString(item)}</li>
+                                    <li key={item} className='badge'>
+                                        <Link to={`/regions/${region_name}/${item}`}>
+                                            {formatString(item)}
+                                        </Link>
+                                    </li>
                                 ))}
                             </ul>
                         </>
@@ -112,7 +116,7 @@ export default function SingleRegion() {
                 <div id="region-page">
                     <Breadcrumb path={location.pathname} />
                     <header>
-                        <img src={`/imgs/maps/${region_name}.webp`} alt="" loading='lazy'/>
+                        <img src={`/imgs/maps/${region_name}.webp`} alt="" loading='lazy' />
                         <div>
                             <div className='region-info'>
                                 <h1>{formatString(region_name)}</h1>

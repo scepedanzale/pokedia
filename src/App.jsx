@@ -9,6 +9,7 @@ import SingleType from './components/types/SingleType';
 import WorldMap from './pages/WorldMap';
 import SingleRegion from './pages/SingleRegion';
 import ScrollToTop from './components/layout/ScrollToTop';
+import SingleLocation from './pages/SingleLocation';
 
 function App() {
 
@@ -25,9 +26,8 @@ function App() {
           <Route path="/types/:type_name/*" element={<NotFoundPage />} />
           <Route path='/regions' element={<WorldMap />} />
           <Route path='/regions/:region_name' element={<SingleRegion />} />
-          {/* <Route path='/search' element={<SearchPage/>}/>
-              <Route path='/favourites' element={<FavouritePage/>}/>
-              <Route path='/type/:name' element={<SingleTypePage/>}/> */}
+          <Route path='/regions/:region_name/:location_name' element={<SingleLocation />} />
+              {/* <Route path='/favourites' element={<FavouritePage/>}/> */}
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>

@@ -50,6 +50,8 @@ export default function PokemonList({ pokemonListProp }) {
         }
     };
 
+    console.log('PROPSS', pokemonListProp)
+
     useEffect(() => {
         const handleScroll = () => {
             setScrollY(window.scrollY);
@@ -72,6 +74,7 @@ export default function PokemonList({ pokemonListProp }) {
 
     useEffect(() => {
         setLoader(true);
+        setVisiblePokemon([]);
         if (pokemonListProp?.length > 0) {
             setPokemonList(pokemonListProp);
             setVisiblePokemon(pokemonListProp.slice(0, numPokemon));
@@ -97,7 +100,7 @@ export default function PokemonList({ pokemonListProp }) {
                     });
             }
         }
-    }, []);
+    }, [pokemonListProp]);
 
     const loadMorePokemon = () => {
         const newOffset = offset + numPokemon;
