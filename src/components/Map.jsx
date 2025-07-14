@@ -4,7 +4,7 @@ export default function Map({regions}) {
     console.log(regions);
     return (
         <div id="world-map">
-            <img src="/imgs/world_map.jpeg" alt="" />
+            <img src="/imgs/world_map.jpeg" alt="" loading="lazy"/>
             {regions && regions.map((region, index) => (
                 region.name !== 'hisui' &&
                 <Link

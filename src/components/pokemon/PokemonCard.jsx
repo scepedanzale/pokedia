@@ -21,7 +21,7 @@ export default function PokemonCard({ pokemon }) {
         singlePokemon.name && singlePokemon.sprites.front_default &&
         <div className='pokemon-card'>
             <Link to={`/pokemon/${singlePokemon.id}`} state={{ singlePokemon }}>
-                <img src={singlePokemon.sprites.front_default} />
+                <img src={singlePokemon.sprites.front_default}/>
                 <div className='pokemon-card__text'>
                     <span>#{pokemonId(singlePokemon.id)}</span>
                     <p>{Capitalize(singlePokemon.name)}</p>

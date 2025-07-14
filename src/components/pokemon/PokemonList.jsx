@@ -17,7 +17,7 @@ export default function PokemonList({ pokemonListProp }) {
     const [pokemonList, setPokemonList] = useState([]); // lista pokemon da visualizzare
     const [visiblePokemon, setVisiblePokemon] = useState([]); // Pokémon effettivamente mostrati
 
-    const numPokemon = 30; // numero pokemon da visualizzare
+    const numPokemon = 50; // numero pokemon da visualizzare
     const [offset, setOffset] = useState(0); // numero partenza pokemon da aggiungere
 
     const initialLoad = useRef(true);
@@ -49,7 +49,6 @@ export default function PokemonList({ pokemonListProp }) {
             return null;
         }
     };
-
 
     useEffect(() => {
         const handleScroll = () => {
@@ -100,20 +99,12 @@ export default function PokemonList({ pokemonListProp }) {
         }
     }, []);
 
-    useEffect(() => {
-        console.log(visiblePokemon)
-        console.log(pokemonList)
-    }, [visiblePokemon, pokemonList])
-
-
     const loadMorePokemon = () => {
         const newOffset = offset + numPokemon;
         setOffset(newOffset);
         const nextBatch = pokemonList.slice(0, newOffset + numPokemon);
         setVisiblePokemon(nextBatch);
     };
-
-
 
     return (
         <Wrapper>

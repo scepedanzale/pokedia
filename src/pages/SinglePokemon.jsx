@@ -87,12 +87,10 @@ export default function SinglePokemon() {
           {/* Location Areas */}
           <LocationAreas locationAreaEncountersUrl={currentPokemon.location_area_encounters} />
 
-
           {/* More info: moves, games, location */}
           <MoreInfo currentPokemon={currentPokemon} />
 
         </div>
-
       </Wrapper>
     </>
   )
