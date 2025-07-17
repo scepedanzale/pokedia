@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { urlTypes } from '../../config/config'
 import { typeImages } from '../../config/types';
@@ -10,7 +10,6 @@ import Wrapper from '../layout/Wrapper';
 export default function ListTypes() {
 
   const [allTypes, setAllTypes] = useState([]);
-  const location = useLocation();
 
   useEffect(() => {
     axios(urlTypes)
@@ -24,7 +23,7 @@ export default function ListTypes() {
 
   return (
     <Wrapper>
-      <Breadcrumb path={location.pathname} />
+      <Breadcrumb />
 
       <section>
         <div id='list-types'>

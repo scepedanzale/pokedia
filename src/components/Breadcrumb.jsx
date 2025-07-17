@@ -1,23 +1,24 @@
 import { useEffect, useState } from 'react'
 import { formatString } from '../functions/functions';
 import { MdArrowForwardIos } from "react-icons/md";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
-export default function Breadcrumb({ path }) {
+export default function Breadcrumb() {
     const [slugs, setSlugs] = useState([]);
+    const location = useLocation();
 
     useEffect(() => {
-        if (path) {
-            const result = path.split('/').slice(1);
+        if (location) {
+            const result = location.pathname.split('/').slice(1);
             setSlugs(result);
         }
-    }, [path])
+    }, [location])
 
     return (
         <div className='breadcrumb'>
             {slugs?.map((slug, index) => {
-                const href = path.slice(0, path.indexOf(slug) + slug.length);
+                const href = location.pathname.slice(0, location.pathname.indexOf(slug) + slug.length);
                 return (
                     <>
                         <Link to={`${href}`} className={`slug ${index === slugs.length - 1 && 'active'}`}>{formatString(slug)}</Link>

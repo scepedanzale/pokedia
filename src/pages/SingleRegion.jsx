@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { urlRegions } from '../config/config';
 import axios from 'axios';
 import { formatString } from '../functions/functions';
@@ -11,7 +11,6 @@ import Wrapper from '../components/layout/Wrapper';
 
 export default function SingleRegion() {
     const { region_name } = useParams();
-    const location = useLocation();
 
     const [region, setRegion] = useState({});
 
@@ -114,7 +113,7 @@ export default function SingleRegion() {
         <Wrapper>
             {region?.version_groups &&
                 <div id="region-page">
-                    <Breadcrumb path={location.pathname} />
+                    <Breadcrumb />
                     <header>
                         <img src={`/imgs/maps/${region_name}.webp`} alt="" loading='lazy' />
                         <div>

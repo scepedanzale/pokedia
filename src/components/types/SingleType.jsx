@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { urlTypes } from '../../config/config';
 import { typeImages } from '../../config/types';
@@ -13,8 +13,6 @@ import Wrapper from '../layout/Wrapper';
 export default function SingleType() {
 
     const { type_name } = useParams();
-
-    const location = useLocation();
 
     const urlType = location.state?.urlType || null;
 
@@ -52,7 +50,7 @@ export default function SingleType() {
             {error && <Error />}
             {type?.pokemon &&
                 <div id='type-page'>
-                    <Breadcrumb path={location.pathname}/>
+                    <Breadcrumb />
                     <header>
                         <img src={typeImg} />
 

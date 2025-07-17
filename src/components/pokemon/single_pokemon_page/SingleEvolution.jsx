@@ -57,7 +57,7 @@ export default function SingleEvolution({ evolution, currentPokemonName, numEvol
             <div className='evolution-desc'>
                 {
                     numEvolution == 1 ?
-                        <p className='italic'>{Capitalize(currentPokemonName)} non ha evoluzioni</p>
+                        <p className='italic'>{Capitalize(currentPokemonName)} has not evolutions.</p>
                         :
                         Object.entries(evolution?.evolution_details || {}).map(([key, value]) => {
                             if (value === null || value === false || value === '') return null;

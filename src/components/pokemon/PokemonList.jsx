@@ -14,7 +14,7 @@ export default function PokemonList({ pokemonListProp }) {
     const [loader, setLoader] = useState(false);
     const [error, setError] = useState(false);
 
-    const [pokemonList, setPokemonList] = useState([]); // lista pokemon da visualizzare
+    const [pokemonList, setPokemonList] = useState([]); // lista pokemon
     const [visiblePokemon, setVisiblePokemon] = useState([]); // Pokémon effettivamente mostrati
 
     const numPokemon = 50; // numero pokemon da visualizzare
@@ -129,14 +129,16 @@ export default function PokemonList({ pokemonListProp }) {
             {pokemonList &&
                 <>
                     {scrollY > 200 && <a href='#top' className='button back-to-top'><FaArrowUp /></a>}
-
-                    <button
-                        type='button'
-                        className='button'
-                        onClick={loadMorePokemon}
-                    >
-                        Carica altri pokémon
-                    </button>
+                    {
+                        visiblePokemon < pokemonList &&
+                        <button
+                            type='button'
+                            className='button'
+                            onClick={loadMorePokemon}
+                        >
+                            Load more
+                        </button>
+                    }
                 </>
             }
         </Wrapper>

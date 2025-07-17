@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { urlLocation } from "../config/config";
 import Wrapper from "../components/layout/Wrapper";
 import { formatString } from "../functions/functions";
@@ -12,7 +12,6 @@ import Error from "../components/Error";
 export default function SingleLocation() {
 
     const { location_name } = useParams();
-    const location = useLocation();
 
     const [loader, setLoader] = useState(false);
     const [error, setError] = useState(false);
@@ -53,7 +52,7 @@ export default function SingleLocation() {
         <Wrapper>
             {singleLocation.names &&
                 <div id="location-page">
-                    <Breadcrumb path={location.pathname} />
+                    <Breadcrumb />
                     {loader ? <Loader /> :
                         error ? <Error /> :
                             <>
@@ -64,11 +63,20 @@ export default function SingleLocation() {
 
                                 <section>
                                     <h2>Areas</h2>
-                                    <ul className="badge-list">
-                                        {singleLocation?.areas.map((area, index) => (
-                                            <li key={index} className="badge">{formatString(area.name)}</li>
-                                        ))}
-                                    </ul>
+
+
+                                    {loader ? <Loader />
+                                        :
+                                        singleLocation?.areas.length > 0
+                                            ?
+                                            <ul className="badge-list">
+                                                {singleLocation?.areas.map((area, index) => (
+                                                    <li key={index} className="badge">{formatString(area.name)}</li>
+                                                ))}
+                                            </ul>
+                                            :
+                                            <p>There&apos;s not Areas in this location.</p>
+                                    }
                                 </section>
 
                                 <section>
@@ -78,7 +86,7 @@ export default function SingleLocation() {
                                         pokemonLocation.length > 0
                                             ? <PokemonList pokemonListProp={pokemonLocation} />
                                             :
-                                            <p>Non si trovano Pokémon in questa location.</p>
+                                            <p>There&apos;s not Pokémon in this location.</p>
                                     }
                                 </section>
                             </>
