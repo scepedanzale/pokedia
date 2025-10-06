@@ -8,6 +8,7 @@ export const urlTypes = 'https://pokeapi.co/api/v2/type/';
 
 export const urlRegions = 'https://pokeapi.co/api/v2/region/';
 export const urlLocation = 'https://pokeapi.co/api/v2/location/';
+export const urlHabitat = 'https://pokeapi.co/api/v2/pokemon-habitat/';
 
 export const urlGenerations = 'https://pokeapi.co/api/v2/generation/';
 

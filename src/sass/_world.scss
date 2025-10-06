@@ -1,10 +1,16 @@
 
+/* ----------------------------------------- World Map */
 
+#world-map-container p{
+    margin-bottom: 3em;
+    text-align: center;
+}
 #world-map {
     position: relative;
     display: flex;
     flex-direction: column;
     max-width: 768px;
+    margin: 2em auto;
 
     img {
         width: 100%;
@@ -47,7 +53,7 @@
 }
 
 
-/* Region Page */
+/* ----------------------------------------------- Region Page */
 
 #region-page{
     header{
@@ -155,4 +161,11 @@
     .pin-icon {
         order: 2;
     }
+}
+
+/* ------------------------------- Habitat */
+
+#habitat{
+    margin: auto;
+    max-width: 992px;
 }

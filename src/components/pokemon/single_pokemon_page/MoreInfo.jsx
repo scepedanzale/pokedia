@@ -70,6 +70,7 @@ export default function MoreInfo({ currentPokemon }) {
                     {order === 'default' ? 'abc' : 'default'}
                 </button>
 
+                {/* Lista */}
                 <div className='badge-list'>
                     {displayedList.length > 0 ? displayedList.map((element, index) => {
                         return <p key={index} className='badge'>{Capitalize(getItemName(element))}</p>;
