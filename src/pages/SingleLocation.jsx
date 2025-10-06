@@ -50,6 +50,8 @@ export default function SingleLocation() {
 
     return (
         <Wrapper>
+            {error && <Error />}
+            {loader && <Loader />}
             {singleLocation.names &&
                 <div id="location-page">
                     <Breadcrumb />

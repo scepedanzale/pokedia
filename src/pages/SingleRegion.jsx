@@ -6,11 +6,15 @@ import { formatString } from '../functions/functions';
 import Breadcrumb from '../components/Breadcrumb';
 import { IoLogoGameControllerB } from "react-icons/io";
 import Wrapper from '../components/layout/Wrapper';
+import Error from '../components/Error';
+import Loader from '../components/Loader';
 
 
 
 export default function SingleRegion() {
     const { region_name } = useParams();
+    const [error, setError] = useState(false);
+    const [loader, setLoader] = useState(false);
 
     const [region, setRegion] = useState({});
 
@@ -98,19 +102,24 @@ export default function SingleRegion() {
     }
 
     useEffect(() => {
-        try {
-            axios(urlRegions + region_name)
-                .then(response => {
-                    console.log(response.data);
-                    setRegion(response.data);
-                })
-        } catch (error) {
-            console.error(error);
-        }
+        setLoader(true);
+        axios(urlRegions + region_name)
+            .then(response => {
+                setRegion(response.data);
+                setError(false);
+            })
+            .catch(error => {
+                console.error(error);
+                setError(true);
+            })
+            .finally(() => setLoader(false))
     }, [region_name])
 
     return (
         <Wrapper>
+            {error && <Error />}
+            {loader && <Loader/>}
+
             {region?.version_groups &&
                 <div id="region-page">
                     <Breadcrumb />

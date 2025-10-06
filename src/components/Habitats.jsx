@@ -24,7 +24,7 @@ export default function Habitats() {
         <Wrapper>
             <div className="habitats">
                 {habitats.map((habitat, index) => (
-                    <Link to={`/habitat/${habitat.name}`} key={index}>
+                    <Link to={`/regions/habitat/${habitat.name}`} key={index}>
                         <div className='habitat-card'>
                             <img src={`./imgs/habitats/${habitat.name}.jpg`} alt="" />
                             <span>{formatString(habitat.name)}</span>

@@ -33,8 +33,6 @@ export default function SingleHabitat() {
     useEffect(() => fetchHabitat(), []);
 
 
-
-
     return (
         <Wrapper>
             <Breadcrumb/>

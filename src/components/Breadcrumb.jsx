@@ -15,14 +15,19 @@ export default function Breadcrumb() {
         }
     }, [location])
 
+
     return (
         <div className='breadcrumb'>
             {slugs?.map((slug, index) => {
                 const href = location.pathname.slice(0, location.pathname.indexOf(slug) + slug.length);
                 return (
                     <>
-                        <Link to={`${href}`} className={`slug ${index === slugs.length - 1 && 'active'}`}>{formatString(slug)}</Link>
-                        {index !== slugs.length - 1 && <MdArrowForwardIos />}
+                        {slug !== 'habitat' &&
+                            <>
+                                <Link to={`${href}`} className={`slug ${index === slugs.length - 1 && 'active'}`}>{formatString(slug)}</Link>
+                                {index !== slugs.length - 1 && <MdArrowForwardIos />}
+                            </>
+                        }
                     </>
                 )
             })}

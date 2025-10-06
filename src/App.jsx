@@ -14,7 +14,6 @@ import Maintenance from './pages/Maintenance';
 import Generations from './pages/Generations';
 import Favourites from './pages/Favourites';
 import SingleHabitat from './pages/SingleHabitat';
-import Habitats from './components/Habitats';
 
 function App() {
 
@@ -32,8 +31,7 @@ function App() {
           <Route path='/regions' element={<WorldMap />} />
           <Route path='/regions/:region_name' element={<SingleRegion />} />
           <Route path='/regions/:region_name/:location_name' element={<SingleLocation />} />
-          <Route path='/habitat' element={<Habitats/>}/>
-          <Route path='/habitat/:habitat_name' element={<SingleHabitat/>}/>
+          <Route path='/regions/habitat/:habitat_name' element={<SingleHabitat/>}/>
           <Route path='/moves' element={<Maintenance />} />
           <Route path='/generations' element={<Generations />} />
           <Route path='/games' element={<Maintenance />} />
