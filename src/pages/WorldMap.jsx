@@ -24,20 +24,25 @@ export default function WorldMap() {
         }
     }, [])
 
-    
+
     return (
         <Wrapper>
             {/* Ricerca region */}
             <Breadcrumb path={location.pathname} />
-            <div id="world-map-container">
-                <h1>Pokémon World Map</h1>
-                <Map regions={regions} />
-                <p>Not official map.</p>
-            </div>
-            <div id="habitat">
-                <h2>Habitat</h2>
-                <Habitats/>
-            </div>
+            <section>
+                <div id="world-map-container">
+                    <h1>Pokémon World Map</h1>
+                    <Map regions={regions} />
+                    <p>Not official map.</p>
+                </div>
+            </section>
+
+            <section>
+                <div id="habitat">
+                    <h2>Habitat</h2>
+                    <Habitats />
+                </div>
+            </section>
         </Wrapper>
     )
 }

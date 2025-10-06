@@ -35,9 +35,11 @@ export default function SingleHabitat() {
 
     return (
         <Wrapper>
-            <Breadcrumb/>
-            <h1>{habitat_name}</h1>
-            <PokemonList pokemonListProp={habitat.pokemon_species} />
+            <Breadcrumb />
+            <section>
+                <h1>{habitat_name}</h1>
+                <PokemonList pokemonListProp={habitat.pokemon_species} />
+            </section>
         </Wrapper>
     )
 }
