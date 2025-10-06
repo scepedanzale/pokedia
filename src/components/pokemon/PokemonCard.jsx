@@ -12,13 +12,14 @@ export default function PokemonCard({ pokemon }) {
             axios(pokemon.url)
                 .then(response => {
                     setSinglePokemon(response.data)
+                    console.log('SINGLE POKEMON', singlePokemon)
                 })
                 .catch(error => console.error(error))
         }
     }, [pokemon])
 
     return (
-        singlePokemon.name && singlePokemon.sprites.front_default &&
+        singlePokemon.name && singlePokemon?.sprites?.front_default &&
         <div className='pokemon-card'>
             <Link to={`/pokemon/${singlePokemon.id}`} state={{ singlePokemon }}>
                 <img src={singlePokemon.sprites.front_default}/>

@@ -108,6 +108,7 @@ export default function PokemonList({ pokemonListProp }) {
         const nextBatch = pokemonList.slice(0, newOffset + numPokemon);
         setVisiblePokemon(nextBatch);
     };
+    visiblePokemon&&console.log(visiblePokemon)
 
     return (
         <Wrapper>
@@ -130,7 +131,7 @@ export default function PokemonList({ pokemonListProp }) {
                 <>
                     {scrollY > 200 && <a href='#top' className='button back-to-top'><FaArrowUp /></a>}
                     {
-                        visiblePokemon < pokemonList &&
+                        visiblePokemon.length < pokemonList.length &&
                         <button
                             type='button'
                             className='button'
