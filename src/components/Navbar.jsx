@@ -43,7 +43,7 @@ export default function Navbar() {
             <span>Types</span></Link>
         </li>
         <li>
-          <Link to="/" className={location.pathname.includes('moves') && 'active'}>
+          <Link to="/moves" className={location.pathname.includes('moves') && 'active'}>
             <svg
               width='64px'
               height='64px'
@@ -130,7 +130,7 @@ export default function Navbar() {
             <span>Regions</span></Link>
         </li>
         <li>
-          <Link to="/" className={location.pathname.includes('generations') && 'active'}>
+          <Link to="/generations" className={location.pathname.includes('generations') && 'active'}>
             <svg xmlns="http://www.w3.org/2000/svg" width="64px" height="64px" viewBox="0 0 24 24" fill="none" stroke="#f2f2f2">
 
               <g id="SVGRepo_bgCarrier" strokeWidth="0" />
@@ -143,7 +143,7 @@ export default function Navbar() {
             <span>Generations</span></Link>
         </li>
         <li>
-          <Link to="/" className={location.pathname.includes('games') && 'active'}>
+          <Link to="/games" className={location.pathname.includes('games') && 'active'}>
             <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" height="64px" width="64px" version="1.1" id="_x32_" viewBox="0 0 512 512" xmlSpace="preserve" fill="currentColor" stroke="currentColor">
 
               <g id="SVGRepo_bgCarrier" strokeWidth="0" />
