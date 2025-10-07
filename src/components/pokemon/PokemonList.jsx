@@ -8,6 +8,7 @@ import Loader from '../Loader';
 import Error from '../Error';
 import Wrapper from '../layout/Wrapper';
 import Pagination from '../Pagination';
+import { fetchData } from '../../utils/api';
 
 export default function PokemonList({ pokemonListProp, limit }) {
 
@@ -16,10 +17,8 @@ export default function PokemonList({ pokemonListProp, limit }) {
     const [error, setError] = useState(false);
 
     const [pokemonList, setPokemonList] = useState([]); // lista pokemon
-    const [visiblePokemon, setVisiblePokemon] = useState([]); // Pokémon effettivamente mostrati
+    const [visiblePokemon, setVisiblePokemon] = useState([]); // Pokémon mostrati
 
-    const numPokemon = 10; // numero pokemon da visualizzare
-    const [offset, setOffset] = useState(0); // numero partenza pokemon da aggiungere
 
     const initialLoad = useRef(true);
 
@@ -54,15 +53,11 @@ export default function PokemonList({ pokemonListProp, limit }) {
     console.log('PROPSS', pokemonListProp)
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrollY(window.scrollY);
-        };
+        const handleScroll = () => setScrollY(window.scrollY);
 
         window.addEventListener('scroll', handleScroll);
 
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     useEffect(() => {
@@ -75,44 +70,26 @@ export default function PokemonList({ pokemonListProp, limit }) {
 
     useEffect(() => {
         setLoader(true);
-        /* setVisiblePokemon([]); */
-        if (pokemonListProp?.length > 0) {
-            setPokemonList(pokemonListProp);
-            /* setVisiblePokemon(pokemonListProp.slice(0, numPokemon)); */
-            setLoader(false);
-        } else {
+        setVisiblePokemon([]);
+        if (pokemonListProp?.length > 0) setPokemonList(pokemonListProp);   // controllo se c'è lista da prop
+        else {
             const stored = getWithExpiry('pokemonList');
-            if (stored) {
-                setPokemonList(stored);
-                /* setVisiblePokemon(stored.slice(0, numPokemon)); */
-                setLoader(false);
-            } else {
-                axios.get(urlAllPokemon + '?limit=10000')
-                    .then(res => {
-                        setPokemonList(res.data.results);
-                        /* setVisiblePokemon(res.data.results.slice(0, numPokemon)); */
-                        saveWithExpiry('pokemonList', res.data.results);
-                        setLoader(false);
+            if (stored) setPokemonList(stored); // controllo se in localstorage
+            else {
+                fetchData(urlAllPokemon + '?limit=10000')   // chiamata
+                    .then(response => {
+                        setPokemonList(response.results);
+                        saveWithExpiry('pokemonList', response.results);
                     })
                     .catch(error => {
                         console.error(error);
-                        setLoader(false);
                         setError(true);
                     });
             }
         }
+        setLoader(false);
     }, [pokemonListProp]);
 
-    const handleList = (data) => {
-        setVisiblePokemon(data)
-    }
-
-    const loadMorePokemon = () => {
-        const newOffset = offset + numPokemon;
-        setOffset(newOffset);
-        const nextBatch = pokemonList.slice(0, newOffset + numPokemon);
-        setVisiblePokemon(nextBatch);
-    };
 
     return (
         <Wrapper>
@@ -131,20 +108,11 @@ export default function PokemonList({ pokemonListProp, limit }) {
                     <PokemonCard key={index} pokemon={p?.pokemon ?? p} />
                 ))}
             </div>
+            {/* Paginazione */}
             {pokemonList &&
                 <>
                     {scrollY > 200 && <a href='#top' className='button back-to-top'><FaArrowUp /></a>}
-                    {/* {
-                        visiblePokemon.length < pokemonList.length &&
-                        <button
-                            type='button'
-                            className='button'
-                            onClick={loadMorePokemon}
-                        >
-                            Load more
-                        </button>
-                    } */}
-                    <Pagination recordSet={pokemonList} setVisibleList={handleList} limit={limit}/>
+                    <Pagination recordSet={pokemonList} setVisibleList={(data) => setVisiblePokemon(data)} limit={limit} />
                 </>
             }
         </Wrapper>
