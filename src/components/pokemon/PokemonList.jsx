@@ -9,6 +9,7 @@ import Error from '../Error';
 import Wrapper from '../layout/Wrapper';
 import Pagination from '../Pagination';
 import { fetchData } from '../../utils/api';
+import { getWithExpiry, saveWithExpiry } from '../../utils/storage';
 
 export default function PokemonList({ pokemonListProp, limit }) {
 
@@ -20,72 +21,30 @@ export default function PokemonList({ pokemonListProp, limit }) {
     const [visiblePokemon, setVisiblePokemon] = useState([]); // Pokémon mostrati
 
 
-    const initialLoad = useRef(true);
-
-    const FIFTEEN_DAYS_MS = 15 * 24 * 60 * 60 * 1000; // 15 giorni in ms
-
-    const saveWithExpiry = (key, data, ttl = FIFTEEN_DAYS_MS) => {
-        const now = Date.now();
-        const item = {
-            data,
-            expiry: now + ttl,
-        };
-        localStorage.setItem(key, JSON.stringify(item));
-    };
-
-    const getWithExpiry = (key) => {
-        const itemStr = localStorage.getItem(key);
-        if (!itemStr) return null;
-
-        try {
-            const item = JSON.parse(itemStr);
-            if (Date.now() > item.expiry) {
-                localStorage.removeItem(key);
-                return null;
-            }
-            return item.data;
-        } catch {
-            localStorage.removeItem(key);
-            return null;
-        }
-    };
-
     useEffect(() => {
-        const handleScroll = () => setScrollY(window.scrollY);
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    useEffect(() => {
-        if (initialLoad.current) {
-            initialLoad.current = false;
-            return;
-        }
-
-    }, [initialLoad])
-
-    useEffect(() => {
-        setLoader(true);
-        setVisiblePokemon([]);
-        if (pokemonListProp?.length > 0) setPokemonList(pokemonListProp);   // controllo se c'è lista da prop
-        else {
-            const stored = getWithExpiry('pokemonList');
-            if (stored) setPokemonList(stored); // controllo se in localstorage
+        const loadPokemon = () => {
+            setLoader(true);
+            setVisiblePokemon([]);
+            if (pokemonListProp) setPokemonList(pokemonListProp);   // controllo se c'è lista da prop
             else {
-                fetchData(urlAllPokemon + '?limit=10000')   // chiamata
-                    .then(response => {
-                        setPokemonList(response.results);
-                        saveWithExpiry('pokemonList', response.results);
-                    })
-                    .catch(error => {
-                        console.error(error);
-                        setError(true);
-                    });
+                const stored = getWithExpiry('pokemonList');
+                if (stored) setPokemonList(stored); // controllo se in localstorage
+                else {
+                    fetchData(urlAllPokemon + '?limit=10000')   // chiamata
+                        .then(response => {
+                            setPokemonList(response.results);
+                            saveWithExpiry('pokemonList', response.results);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                            setError(true);
+                        });
+                }
             }
+            setLoader(false);
         }
-        setLoader(false);
+
+        loadPokemon();
     }, [pokemonListProp]);
 
 
@@ -100,18 +59,19 @@ export default function PokemonList({ pokemonListProp, limit }) {
 
             {loader && <Loader />}
             {error && <Error />}
-            <div id="top"></div>
-            <div id='pokemon-list'>
-                {visiblePokemon && visiblePokemon.map((p, index) => (
-                    <PokemonCard key={index} pokemon={p?.pokemon ?? p} />
-                ))}
-            </div>
+            {/* Lista pokemon */}
+            <section>
+                <div id='pokemon-list'>
+                    {visiblePokemon && visiblePokemon.map((p, index) => (
+                        <PokemonCard key={index} pokemon={p?.pokemon ?? p} />
+                    ))}
+                </div>
+            </section>
             {/* Paginazione */}
-            {pokemonList &&
-                <>
-                    {scrollY > 200 && <a href='#top' className='button back-to-top'><FaArrowUp /></a>}
-                    <Pagination recordSet={pokemonList} setVisibleList={(data) => setVisiblePokemon(data)} limit={limit} />
-                </>
+            {pokemonList.length > 0 ?
+                <Pagination recordSet={pokemonList} setVisibleList={(data) => setVisiblePokemon(data)} limit={limit} />
+                :
+                <p>Pokémon not found</p>
             }
         </Wrapper>
     )
