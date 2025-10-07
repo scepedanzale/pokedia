@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Wrapper from '../components/layout/Wrapper';
 import Breadcrumb from '../components/Breadcrumb';
@@ -16,7 +16,7 @@ export default function SingleHabitat() {
         try {
             axios(urlHabitat + habitat_name)
                 .then(response => {
-                    // normalizzo url pokemon per la lista
+                    // normalizzo url se specie
                     setHabitat({
                         ...response.data,
                         pokemon_species: response.data.pokemon_species.map(species => ({

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import axios from 'axios'
-import { Capitalize, pokemonId } from '../../functions/functions';
 import { fetchData } from '../../utils/api';
+import { formatPokemonName } from '../../utils/string';
+import { formatPokemonId } from '../../utils/pokemon';
 
 export default function PokemonCard({ pokemon }) {
 
@@ -23,8 +23,8 @@ export default function PokemonCard({ pokemon }) {
             <Link to={`/pokemon/${singlePokemon.id}`} state={{ singlePokemon }}>
                 <img src={singlePokemon.sprites.front_default} />
                 <div className='pokemon-card__text'>
-                    <span>#{pokemonId(singlePokemon.id)}</span>
-                    <p>{Capitalize(singlePokemon.name)}</p>
+                    <span>#{formatPokemonId(singlePokemon.id)}</span>
+                    <p>{formatPokemonName(singlePokemon.name)}</p>
                 </div>
             </Link>
         </div>

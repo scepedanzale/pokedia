@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { urlSinglePokemon } from '../../../config/config';
-import { Capitalize, formatString } from '../../../functions/functions';
+import { formatPokemonName } from '../../../utils/string';
 
 export default function SingleEvolution({ evolution, currentPokemonName, numEvolution }) {
 
@@ -57,7 +57,7 @@ export default function SingleEvolution({ evolution, currentPokemonName, numEvol
             <div className='evolution-desc'>
                 {
                     numEvolution == 1 ?
-                        <p className='italic'>{Capitalize(currentPokemonName)} has not evolutions.</p>
+                        <p className='italic'>{formatPokemonName(currentPokemonName)} has not evolutions.</p>
                         :
                         Object.entries(evolution?.evolution_details || {}).map(([key, value]) => {
                             if (value === null || value === false || value === '') return null;

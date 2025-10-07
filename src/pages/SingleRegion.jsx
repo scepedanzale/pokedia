@@ -2,12 +2,12 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { urlRegions } from '../config/config';
 import axios from 'axios';
-import { formatString } from '../functions/functions';
 import Breadcrumb from '../components/Breadcrumb';
 import { IoLogoGameControllerB } from "react-icons/io";
 import Wrapper from '../components/layout/Wrapper';
 import Error from '../components/Error';
 import Loader from '../components/Loader';
+import { formatString } from '../utils/string';
 
 
 

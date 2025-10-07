@@ -4,7 +4,7 @@ import axios from 'axios'
 import { urlSinglePokemon } from '../../../config/config'
 import { IoIosArrowBack } from "react-icons/io";
 import { IoIosArrowForward } from "react-icons/io";
-import { pokemonId } from '../../../functions/functions';
+import { formatPokemonId } from '../../../utils/pokemon';
 
 
 export default function PreNextPokemon({ currentPokemon }) {
@@ -44,13 +44,13 @@ export default function PreNextPokemon({ currentPokemon }) {
                 <Link to={`/pokemon/${prev.id}`} className='prev button'>
                     <div className='flex'>
                         <IoIosArrowBack />
-                        <span>#{pokemonId(prev.id)}</span>
+                        <span>#{formatPokemonId(prev.id)}</span>
                     </div>
                 </Link>
             }
             <Link to={`/pokemon/${next.id}`} className='next button'>
                 <div className='flex'>
-                    <span>#{pokemonId(next.id)}</span>
+                    <span>#{formatPokemonId(next.id)}</span>
                     <IoIosArrowForward />
                 </div>
             </Link>

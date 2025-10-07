@@ -3,12 +3,12 @@ import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { urlTypes } from '../../config/config';
 import { typeImages } from '../../config/types';
-import { Capitalize, formatString } from '../../functions/functions';
 import PokemonList from '../pokemon/PokemonList';
 import Loader from '../Loader';
 import Error from '../Error';
 import Breadcrumb from '../Breadcrumb';
 import Wrapper from '../layout/Wrapper';
+import { formatString } from '../../utils/string';
 
 export default function SingleType() {
 
@@ -55,7 +55,7 @@ export default function SingleType() {
                         <img src={typeImg} />
 
                         <div className="intro">
-                            <h1>{Capitalize(type.name)}</h1>
+                            <h1>{formatString(type.name)}</h1>
 
                             <div id='type-effects'>
                                 <h2 className={`text-${type.name}`}>Effects</h2>

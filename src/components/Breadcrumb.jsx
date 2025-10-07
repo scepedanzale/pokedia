@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { formatString } from '../functions/functions';
 import { MdArrowForwardIos } from "react-icons/md";
 import { Link, useLocation } from 'react-router-dom';
+import { formatString } from '../utils/string';
 
 
 export default function Breadcrumb() {

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import Wrapper from '../components/layout/Wrapper';
+import { Link } from 'react-router-dom';
 import { urlGenerations } from '../config/config';
-import { formatString } from '../functions/functions';
+import Wrapper from '../components/layout/Wrapper';
 import Breadcrumb from '../components/Breadcrumb';
-import { fetchData } from '../utils/api';
 import Loader from '../components/Loader';
 import Error from '../components/Error';
 import PokemonList from '../components/pokemon/PokemonList';
-import { Link } from 'react-router-dom';
+import { fetchData } from '../utils/api';
+import { formatString } from '../utils/string';
 
 export default function Versions() {
 

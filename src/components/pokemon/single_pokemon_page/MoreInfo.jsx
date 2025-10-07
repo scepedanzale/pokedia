@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios';
-import { Capitalize } from '../../../functions/functions';
+import { formatPokemonName } from '../../../utils/string';
 
 export default function MoreInfo({ currentPokemon }) {
 
@@ -73,7 +72,7 @@ export default function MoreInfo({ currentPokemon }) {
                 {/* Lista */}
                 <div className='badge-list'>
                     {displayedList.length > 0 ? displayedList.map((element, index) => {
-                        return <p key={index} className='badge'>{Capitalize(getItemName(element))}</p>;
+                        return <p key={index} className='badge'>{formatPokemonName(getItemName(element))}</p>;
                     })
                         :
                         'Information not avaible'

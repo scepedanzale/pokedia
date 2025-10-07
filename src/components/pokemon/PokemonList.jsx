@@ -1,7 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import axios from 'axios'
+import { useEffect, useState } from 'react'
 import { urlAllPokemon } from '../../config/config'
-import { FaArrowUp } from "react-icons/fa";
 import PokemonCard from './PokemonCard';
 import SearchPokemon from './SearchPokemon';
 import Loader from '../Loader';
@@ -13,7 +11,6 @@ import { getWithExpiry, saveWithExpiry } from '../../utils/storage';
 
 export default function PokemonList({ pokemonListProp, limit }) {
 
-    const [scrollY, setScrollY] = useState(window.scrollY);
     const [loader, setLoader] = useState(false);
     const [error, setError] = useState(false);
 

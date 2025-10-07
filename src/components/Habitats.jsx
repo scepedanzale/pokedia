@@ -3,7 +3,7 @@ import Wrapper from '../components/layout/Wrapper'
 import axios from 'axios';
 import { urlHabitat } from '../config/config';
 import { Link } from 'react-router-dom';
-import { formatString } from '../functions/functions';
+import { formatString } from '../utils/string';
 
 export default function Habitats() {
     const [habitats, setHabitats] = useState([]);

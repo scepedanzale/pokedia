@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { urlLocation } from "../config/config";
 import Wrapper from "../components/layout/Wrapper";
-import { formatString } from "../functions/functions";
 import Breadcrumb from "../components/Breadcrumb";
 import PokemonList from "../components/pokemon/PokemonList";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
+import { formatString } from "../utils/string";
 
 export default function SingleLocation() {
 

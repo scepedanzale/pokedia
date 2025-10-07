@@ -11,13 +11,11 @@ import PreNextPokemon from '../components/pokemon/single_pokemon_page/PreNextPok
 import Evolutions from '../components/pokemon/single_pokemon_page/Evolutions';
 import LocationAreas from '../components/pokemon/single_pokemon_page/LocationAreas';
 import Wrapper from '../components/layout/Wrapper';
-import SearchPokemon from '../components/pokemon/SearchPokemon';
 
 
 export default function SinglePokemon() {
   const location = useLocation();
   const { singlePokemon } = location.state || {};
-  const { pokemonForm } = location.state || {};
 
   const { id } = useParams();
 

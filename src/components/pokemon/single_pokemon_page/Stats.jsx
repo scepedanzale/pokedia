@@ -1,4 +1,4 @@
-import { stats } from '../../../functions/functions'
+import { calculateStatsPercentage } from "../../../utils/pokemon";
 
 export default function Stats({ currentPokemon }) {
   return (
@@ -7,7 +7,7 @@ export default function Stats({ currentPokemon }) {
         <div key={index}>
           <p>{stat.stat.name}</p>
           <div className='progress' title={stat.base_stat + '/255'}>
-            <div className={`progress-bar ${currentPokemon?.types[0].type.name}`} style={{ 'width': stats(stat.base_stat) + '%' }}>
+            <div className={`progress-bar ${currentPokemon?.types[0].type.name}`} style={{ 'width': calculateStatsPercentage(stat.base_stat) + '%' }}>
             </div>
           </div>
         </div>

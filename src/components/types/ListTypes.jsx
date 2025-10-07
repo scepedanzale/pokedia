@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { urlTypes } from '../../config/config'
 import { typeImages } from '../../config/types';
-import { Capitalize } from '../../functions/functions';
 import Breadcrumb from '../Breadcrumb';
 import Wrapper from '../layout/Wrapper';
+import { formatString } from '../../utils/string';
 
 export default function ListTypes() {
 
@@ -35,7 +35,7 @@ export default function ListTypes() {
               className={`text-${type.name}`}
             >
               <img src={typeImages[type.name]} />
-              <p>{Capitalize(type.name)}</p>
+              <p>{formatString(type.name)}</p>
             </Link>
           ))}
         </div>

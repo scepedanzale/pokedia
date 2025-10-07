@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Capitalize } from '../../../functions/functions'
-import axios from 'axios';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { formatPokemonName } from '../../../utils/string';
 
 export default function Forms({ currentPokemon, specie }) {
 
@@ -31,7 +31,7 @@ export default function Forms({ currentPokemon, specie }) {
             <h2>Forms</h2>
             {forms && forms.map((singlePokemon) => (
                 <Link to={`/pokemon/ ${singlePokemon.id}`} state={{ singlePokemon }} key={singlePokemon.id} className={`${(singlePokemon?.name === currentPokemon?.name) && 'text-' + currentPokemon?.types[0].type.name}`}>
-                    {Capitalize(singlePokemon?.name)} {singlePokemon.is_default && '(forma predefinita)'}
+                    {formatPokemonName(singlePokemon?.name)} {singlePokemon.is_default && '(forma predefinita)'}
                 </Link>
             ))}
         </section>

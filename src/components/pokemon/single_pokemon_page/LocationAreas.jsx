@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Map from "../../Map";
 import axios from "axios";
-import { formatString } from "../../../functions/functions";
+import Map from "../../Map";
 import Loader from "../../Loader";
 import Error from "../../Error";
+import { formatString } from "../../../utils/string";
 
 export default function LocationAreas({ locationAreaEncountersUrl }) {
 

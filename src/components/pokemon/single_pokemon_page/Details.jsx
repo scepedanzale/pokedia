@@ -1,6 +1,7 @@
-import { Capitalize, genderRate, pokemonId, stats } from '../../../functions/functions'
 import { AiOutlineSound } from 'react-icons/ai'
 import { Link } from 'react-router-dom';
+import { formatPokemonName } from '../../../utils/string';
+import { calculateStatsPercentage, formatGenderRate, formatPokemonId } from '../../../utils/pokemon';
 
 export default function Details({ currentPokemon, specie }) {
 
@@ -16,7 +17,7 @@ export default function Details({ currentPokemon, specie }) {
             <div>
                 <div className='pokemon-meta'>
                     <p>
-                        <span>#{pokemonId(currentPokemon.id)}</span>
+                        <span>#{formatPokemonId(currentPokemon.id)}</span>
                         <br />
                         <b className={`${currentPokemon?.types[0]?.type?.name}`}>{specie?.is_legendary && 'LEGENDARY'}</b>
                     </p>
@@ -30,7 +31,7 @@ export default function Details({ currentPokemon, specie }) {
                     </button>
                 </div>
                 <div id='pokemon-identity'>
-                    <h1>{Capitalize(currentPokemon?.name)}</h1>
+                    <h1>{formatPokemonName(currentPokemon?.name)}</h1>
                     {specie.genera && specie.genera.map((g, index) => (
                         <p key={index} className={`text-${currentPokemon?.types[0]?.type?.name}`}>{g.language.name == 'en' && g.genus}</p>
                     ))}
@@ -41,7 +42,7 @@ export default function Details({ currentPokemon, specie }) {
                 {currentPokemon?.types &&
                     currentPokemon.types.map((t, index) => (
                         <Link to={`/types/${t.type.name}`} key={index} className={`type ${t.type.name}`}>
-                            {Capitalize(t.type.name)}
+                            {formatPokemonName(t.type.name)}
                         </Link>
                     ))}
             </div>
@@ -52,9 +53,9 @@ export default function Details({ currentPokemon, specie }) {
                 {/* habitat */}
                 {specie?.habitat && <p>Habitat: {specie.habitat.name}</p>}
                 {/* capture rate */}
-                {specie?.capture_rate && <p>Capture rate: {stats(specie.capture_rate)}%</p>}
+                {specie?.capture_rate && <p>Capture rate: {calculateStatsPercentage(specie.capture_rate)}%</p>}
                 {/* Gender rate */}
-                {specie?.gender_rate && <p>Gender rate: {genderRate(specie.gender_rate)}</p>}
+                {specie?.gender_rate && <p>Gender rate: {formatGenderRate(specie.gender_rate)}</p>}
             </div>
         </div>
     )
