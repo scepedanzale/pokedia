@@ -5,9 +5,9 @@ import { urlLocation } from "../config/config";
 import Wrapper from "../components/layout/Wrapper";
 import Breadcrumb from "../components/Breadcrumb";
 import PokemonList from "../components/pokemon/PokemonList";
-import Loader from "../components/Loader";
-import Error from "../components/Error";
 import { formatString } from "../utils/string";
+import Loader from "../components/ui/Loader";
+import Error from "../components/ui/Error";
 
 export default function SingleLocation() {
 
@@ -50,8 +50,6 @@ export default function SingleLocation() {
 
     return (
         <Wrapper>
-            {error && <Error />}
-            {loader && <Loader />}
             {singleLocation.names &&
                 <div id="location-page">
                     <Breadcrumb />

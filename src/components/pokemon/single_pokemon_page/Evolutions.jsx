@@ -5,6 +5,7 @@ import SingleEvolution from './SingleEvolution';
 export default function Evolutions({ currentPokemon }) {
     const [evolutionsUrl, setEvolutionsUrl] = useState([]);
 
+    // chiamata catena ev
     const fetchEvolutionChain = async (evolutionChainUrl) => {
         try {
             const response = await axios(evolutionChainUrl);
@@ -15,6 +16,7 @@ export default function Evolutions({ currentPokemon }) {
         }
     };
 
+    // chiamata specie => return url catena ev
     const fetchEvolutionSpecie = async () => {
         try {
             const response = await axios(currentPokemon?.species?.url);
@@ -69,9 +71,7 @@ export default function Evolutions({ currentPokemon }) {
             }
         };
 
-        if (currentPokemon) {
-            fetchEvolutionsUrl();
-        }
+        if (currentPokemon) fetchEvolutionsUrl();
     }, [currentPokemon]);
 
     return (

@@ -6,20 +6,20 @@ import { calculateStatsPercentage, formatGenderRate, formatPokemonId } from '../
 export default function Details({ currentPokemon, specie }) {
 
     // verso pokemon
-    function playSound(url) {
+    const playSound = (url) => {
         const a = new Audio(url);
         a.play();
     }
 
     return (
         <div id='pokemon-info'>
-            {/* nome e numero */}
             <div>
                 <div className='pokemon-meta'>
+                    {/* id */}
                     <p>
                         <span>#{formatPokemonId(currentPokemon.id)}</span>
                         <br />
-                        <b className={`${currentPokemon?.types[0]?.type?.name}`}>{specie?.is_legendary && 'LEGENDARY'}</b>
+                        <b className={currentPokemon?.types[0]?.type?.name}>{specie?.is_legendary && 'LEGENDARY'}</b>
                     </p>
                     {/* verso */}
                     <button
@@ -30,6 +30,7 @@ export default function Details({ currentPokemon, specie }) {
                         <AiOutlineSound />
                     </button>
                 </div>
+                {/* nome */}
                 <div id='pokemon-identity'>
                     <h1>{formatPokemonName(currentPokemon?.name)}</h1>
                     {specie.genera && specie.genera.map((g, index) => (

@@ -6,21 +6,21 @@ export default function Abilities({ currentPokemon }) {
     const [abilities, setAbilities] = useState([])
 
     useEffect(() => {
-        if (currentPokemon.abilities) {
-            const fetchPokemonAbility = async () => {
-                try {
-                    const request = currentPokemon.abilities.map(a =>
-                        axios(a.ability.url)
-                            .then(response => (response.data))
-                            .catch(e => console.log(e)))
-                    const result = await Promise.all(request);
-                    setAbilities(result)
-                } catch (err) {
-                    console.log(err);
-                }
+        const fetchPokemonAbility = async () => {
+            if (!currentPokemon.abilities) return null;
+            try {
+                const request = currentPokemon.abilities.map(a =>
+                    axios(a.ability.url)
+                        .then(response => (response.data))
+                        .catch(e => console.log(e)))
+                const result = await Promise.all(request);
+                setAbilities(result)
+            } catch (err) {
+                console.log(err);
             }
-            fetchPokemonAbility();
         }
+        fetchPokemonAbility();
+
     }, [currentPokemon])
 
     return (
@@ -33,7 +33,6 @@ export default function Abilities({ currentPokemon }) {
                         (effect.language.name === 'en' || effect.language.name === 'it') && effect.effect
                     ))}</p>
                 </div>
-
             ))}
         </section>
     )

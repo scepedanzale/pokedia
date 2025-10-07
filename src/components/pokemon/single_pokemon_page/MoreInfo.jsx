@@ -18,15 +18,11 @@ export default function MoreInfo({ currentPokemon }) {
 
     const handleMoreInfo = async (info) => {
         setSelected(info);
-
         let data = [];
 
-        if (info === 'moves') {
-            data = currentPokemon?.moves || [];
-        } else if (info === 'games') {
-            data = currentPokemon?.game_indices || [];
-        } 
-
+        if (info === 'moves') data = currentPokemon?.moves || [];
+        else if (info === 'games') data = currentPokemon?.game_indices || [];
+        
         setDefaultOrder(data);
         setAbcOrder([...data].sort((a, b) => getItemName(a).localeCompare(getItemName(b))));
     }
@@ -36,9 +32,7 @@ export default function MoreInfo({ currentPokemon }) {
         setSelected('moves');
     }, [currentPokemon])
 
-    const handleOrder = (value) => {
-        setOrder(value);
-    }
+    const handleOrder = (value) => setOrder(value);
 
     const displayedList = order === 'default' ? defaultOrder : abcOrder;
 
@@ -60,7 +54,7 @@ export default function MoreInfo({ currentPokemon }) {
                     </span>
                 </div>
 
-                {/* ordine predefinito, alfabetico */}
+                {/* ordinamento */}
                 <button
                     id='order-btn'
                     className={`text-${currentPokemon?.types[0].type.name} border-${currentPokemon?.types[0].type.name}`}
@@ -69,7 +63,7 @@ export default function MoreInfo({ currentPokemon }) {
                     {order === 'default' ? 'abc' : 'default'}
                 </button>
 
-                {/* Lista */}
+                {/* lista */}
                 <div className='badge-list'>
                     {displayedList.length > 0 ? displayedList.map((element, index) => {
                         return <p key={index} className='badge'>{formatPokemonName(getItemName(element))}</p>;

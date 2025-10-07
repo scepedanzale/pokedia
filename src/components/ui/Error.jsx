@@ -1,4 +1,4 @@
-import error from '../imgs/error.gif';
+import error from '../../imgs/error.gif';
 
 export default function Error({ errorMessage }) {
   return (

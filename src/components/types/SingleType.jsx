@@ -4,11 +4,11 @@ import axios from 'axios';
 import { urlTypes } from '../../config/config';
 import { typeImages } from '../../config/types';
 import PokemonList from '../pokemon/PokemonList';
-import Loader from '../Loader';
-import Error from '../Error';
 import Breadcrumb from '../Breadcrumb';
 import Wrapper from '../layout/Wrapper';
 import { formatString } from '../../utils/string';
+import Loader from '../ui/Loader';
+import Error from '../ui/Error';
 
 export default function SingleType() {
 

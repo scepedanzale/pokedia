@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Map from "../../Map";
-import Loader from "../../Loader";
-import Error from "../../Error";
 import { formatString } from "../../../utils/string";
+import { fetchData } from "../../../utils/api";
+import MouseAnimation from "../../ui/MouseAnimation";
+import Loader from "../../ui/Loader";
+import Error from "../../ui/Error";
 
 export default function LocationAreas({ locationAreaEncountersUrl }) {
 
@@ -19,7 +20,6 @@ export default function LocationAreas({ locationAreaEncountersUrl }) {
         const fetch = async () => {
             try {
                 const location_areas = await fetchData(locationAreaEncountersUrl);
-
                 let data = [];
 
                 for (const area of location_areas) {
@@ -34,28 +34,16 @@ export default function LocationAreas({ locationAreaEncountersUrl }) {
                 if (places.length !== location_areas.length) {
                     setPlaces(data);
                 }
-                setLoader(false);
             } catch (error) {
                 console.error(error);
-                setLoader(false);
                 setError(true);
             }
+            setLoader(false);
         }
         fetch();
     }, [locationAreaEncountersUrl])
 
-    const fetchData = (url) => {
-        return axios(url)
-            .then(response => {
-                return response.data;
-            })
-            .catch(error => {
-                console.log(error);
-                return [];
-            })
-    }
-
-    const isLargeScreen = () => window.innerWidth >= 1024; // o altra soglia
+    const isLargeScreen = () => window.innerWidth >= 1024;
 
     const handleClick = (region) => {
         if (isLargeScreen()) return; // su grandi schermi l'hover gestisce tutto
@@ -77,46 +65,37 @@ export default function LocationAreas({ locationAreaEncountersUrl }) {
         <section id="location-areas">
             <h2>Location Areas</h2>
 
-            {loader ? <Loader /> :
-                error ? <Error /> :
-                    places?.length > 0 ?
-                        <div id="world-map-wrapper">
-                            <Map
-                                regions={
-                                    places.reduce((acc, place) => {
-                                        if (!acc.some(r => r.name === place.region)) {
-                                            acc.push({ name: place.region });
-                                        }
-                                        return acc;
-                                    }, [])
+            {loader && <Loader />}
+            {error && <Error />}
+            {places?.length > 0 &&
+                <div id="world-map-wrapper">
+                    <Map
+                        regions={
+                            places.reduce((acc, place) => {
+                                if (!acc.some(r => r.name === place.region)) {
+                                    acc.push({ name: place.region });
                                 }
-                            />
+                                return acc;
+                            }, [])
+                        }
+                    />
 
-                            <ul>
-                                {places.length > 5 &&
-                                    <div id="scroll">
-                                        <div id="scroll-point"></div>
-                                    </div>
-                                }
-                                {places.map((place, index) => (
-                                    <li
-                                        key={index}
-                                        onClick={() => handleClick(place.region)}
-                                        onMouseEnter={() => handleHover(place.region)}
-                                        onMouseLeave={() => handleHover(place.region, true)}
-                                    >
-                                        <p className="location-area">{formatString(place.location_area)}</p>
-                                        <span className="location">
-                                            {formatString(place.location)} - {formatString(place.region)}
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        :
-                        <p>No location areas found for this Pokémon.</p>
+                    <ul>
+                        {places.length > 5 && <MouseAnimation/>}
+                        {places.map((place, index) => (
+                            <li
+                                key={index}
+                                onClick={() => handleClick(place.region)}
+                                onMouseEnter={() => handleHover(place.region)}
+                                onMouseLeave={() => handleHover(place.region, true)}
+                            >
+                                <p className="location-area">{formatString(place.location_area)}</p>
+                                <span className="location">{formatString(place.location)} - {formatString(place.region)}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             }
-
         </section>
     )
 }

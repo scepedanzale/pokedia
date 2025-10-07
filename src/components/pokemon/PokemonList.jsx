@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react'
 import { urlAllPokemon } from '../../config/config'
 import PokemonCard from './PokemonCard';
 import SearchPokemon from './SearchPokemon';
-import Loader from '../Loader';
-import Error from '../Error';
 import Wrapper from '../layout/Wrapper';
 import Pagination from '../Pagination';
 import { fetchData } from '../../utils/api';
 import { getWithExpiry, saveWithExpiry } from '../../utils/storage';
+import Loader from '../ui/Loader';
+import Error from '../ui/Error';
 
 export default function PokemonList({ pokemonListProp, limit }) {
 

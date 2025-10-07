@@ -1,4 +1,4 @@
-import pokeball_loader from '../imgs/pokeball_loader.png';
+import pokeball_loader from '../../imgs/pokeball_loader.png';
 
 export default function Loader() {
   return (

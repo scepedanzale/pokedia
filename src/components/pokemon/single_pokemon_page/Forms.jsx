@@ -8,21 +8,21 @@ export default function Forms({ currentPokemon, specie }) {
     const [forms, setForms] = useState([]);
 
     useEffect(() => {
-        if (specie.varieties) {
-            const fetchPokemonForms = async () => {
-                try {
-                    const requests = specie.varieties.map(variety =>
-                        axios(variety.pokemon.url).then(response => (response.data))
-                    );
+        const fetchPokemonForms = async () => {
+            if (!specie.varieties) return null;
+            try {
+                const requests = specie.varieties.map(variety =>
+                    axios(variety.pokemon.url).then(response => (response.data))
+                );
 
-                    const results = await Promise.all(requests);
-                    setForms(results);
-                } catch (error) {
-                    console.error("Error fetching Pokémon forms:", error);
-                }
-            };
-            fetchPokemonForms();
-        }
+                const results = await Promise.all(requests);
+                setForms(results);
+            } catch (error) {
+                console.error("Error fetching Pokémon forms:", error);
+            }
+        };
+        
+        fetchPokemonForms();
     }, [specie]);
 
 
