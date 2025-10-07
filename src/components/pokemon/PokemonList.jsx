@@ -7,8 +7,9 @@ import SearchPokemon from './SearchPokemon';
 import Loader from '../Loader';
 import Error from '../Error';
 import Wrapper from '../layout/Wrapper';
+import Pagination from '../Pagination';
 
-export default function PokemonList({ pokemonListProp }) {
+export default function PokemonList({ pokemonListProp, limit }) {
 
     const [scrollY, setScrollY] = useState(window.scrollY);
     const [loader, setLoader] = useState(false);
@@ -17,7 +18,7 @@ export default function PokemonList({ pokemonListProp }) {
     const [pokemonList, setPokemonList] = useState([]); // lista pokemon
     const [visiblePokemon, setVisiblePokemon] = useState([]); // Pokémon effettivamente mostrati
 
-    const numPokemon = 50; // numero pokemon da visualizzare
+    const numPokemon = 10; // numero pokemon da visualizzare
     const [offset, setOffset] = useState(0); // numero partenza pokemon da aggiungere
 
     const initialLoad = useRef(true);
@@ -74,22 +75,22 @@ export default function PokemonList({ pokemonListProp }) {
 
     useEffect(() => {
         setLoader(true);
-        setVisiblePokemon([]);
+        /* setVisiblePokemon([]); */
         if (pokemonListProp?.length > 0) {
             setPokemonList(pokemonListProp);
-            setVisiblePokemon(pokemonListProp.slice(0, numPokemon));
+            /* setVisiblePokemon(pokemonListProp.slice(0, numPokemon)); */
             setLoader(false);
         } else {
             const stored = getWithExpiry('pokemonList');
             if (stored) {
                 setPokemonList(stored);
-                setVisiblePokemon(stored.slice(0, numPokemon));
+                /* setVisiblePokemon(stored.slice(0, numPokemon)); */
                 setLoader(false);
             } else {
                 axios.get(urlAllPokemon + '?limit=10000')
                     .then(res => {
                         setPokemonList(res.data.results);
-                        setVisiblePokemon(res.data.results.slice(0, numPokemon));
+                        /* setVisiblePokemon(res.data.results.slice(0, numPokemon)); */
                         saveWithExpiry('pokemonList', res.data.results);
                         setLoader(false);
                     })
@@ -102,13 +103,16 @@ export default function PokemonList({ pokemonListProp }) {
         }
     }, [pokemonListProp]);
 
+    const handleList = (data) => {
+        setVisiblePokemon(data)
+    }
+
     const loadMorePokemon = () => {
         const newOffset = offset + numPokemon;
         setOffset(newOffset);
         const nextBatch = pokemonList.slice(0, newOffset + numPokemon);
         setVisiblePokemon(nextBatch);
     };
-    visiblePokemon&&console.log(visiblePokemon)
 
     return (
         <Wrapper>
@@ -130,7 +134,7 @@ export default function PokemonList({ pokemonListProp }) {
             {pokemonList &&
                 <>
                     {scrollY > 200 && <a href='#top' className='button back-to-top'><FaArrowUp /></a>}
-                    {
+                    {/* {
                         visiblePokemon.length < pokemonList.length &&
                         <button
                             type='button'
@@ -139,7 +143,8 @@ export default function PokemonList({ pokemonListProp }) {
                         >
                             Load more
                         </button>
-                    }
+                    } */}
+                    <Pagination recordSet={pokemonList} setVisibleList={handleList} limit={limit}/>
                 </>
             }
         </Wrapper>

@@ -12,7 +12,7 @@
 // single card
 .pokemon-card {
     width: 100%;
-    max-width: 200px;
+    max-width: 170px;
     background-color: #ffffff;
     border-radius: 5px;
     overflow: hidden;
@@ -48,5 +48,11 @@
         span {
             font-size: 0.8em;
         }
+    }
+}
+
+@media screen and (max-width: 700px ) {
+    .pokemon-card{
+        max-width: 100px;
     }
 }

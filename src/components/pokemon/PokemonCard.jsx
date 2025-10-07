@@ -12,7 +12,6 @@ export default function PokemonCard({ pokemon }) {
             axios(pokemon.url)
                 .then(response => {
                     setSinglePokemon(response.data)
-                    console.log('SINGLE POKEMON', singlePokemon)
                 })
                 .catch(error => console.error(error))
         }
