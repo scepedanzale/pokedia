@@ -77,18 +77,19 @@ h1 {
     font-size: 2.3rem;
     font-family: var(--font-title);
     letter-spacing: 2px;
+    margin-bottom: 0.7em;
 }
 
 h2 {
     font-family: var(--font-title);
     letter-spacing: 2px;
     font-size: 1.5em;
-    margin-bottom: 0.7em;
+    margin-bottom: 0.5em;
 }
 
 
 
-/* Error page */
+/* ----------------------------------- Error page */
 
 .not-found-page,
 .error-page {
@@ -103,7 +104,7 @@ h2 {
     }
 }
 
-/* Custom classes */
+/* ---------------------------------- Custom classes */
 .button {
     background-color: var(--secondary-color);
     color: var(--primary-color);
@@ -124,6 +125,7 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin: 10px 0;
 }
 
 .badge {

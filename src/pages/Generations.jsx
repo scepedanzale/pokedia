@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Wrapper from '../components/layout/Wrapper';
 import { urlGenerations } from '../config/config';
-import axios from 'axios';
 import { formatString } from '../functions/functions';
 import Breadcrumb from '../components/Breadcrumb';
 import { fetchData } from '../utils/api';
@@ -15,20 +14,34 @@ export default function Generations() {
     const [error, setError] = useState(false);
     const [loader, setLoader] = useState(false);
 
-
     useEffect(() => {
         const loadGenerations = async () => {
             try {
                 setLoader(true);
                 const data = await fetchData(urlGenerations);
+
                 if (data.results) {
-                    console.log(data)
+                    console.log('Generation data', data);
+
                     const results = await Promise.all(
-                        data.results.map(element => fetchData(element.url))
+                        data.results.map(async (element) => {
+                            const generation = await fetchData(element.url);
+                            const versions = await Promise.all(
+                                generation.version_groups.map(async (ver) => {
+                                    const versionData = await fetchData(ver.url);
+                                    return versionData
+                                })
+                            )
+
+                            return {
+                                ...generation,
+                                versions
+                            }
+                        })
                     );
 
                     setGenerations(results);
-                    console.log(results)
+                    console.log('RESULTSSS', results)
                 } else setError(true)
             } catch (error) {
                 console.log(error)
@@ -41,7 +54,6 @@ export default function Generations() {
     }, [])
 
 
-
     return (
         <Wrapper>
             <Breadcrumb />
@@ -52,11 +64,20 @@ export default function Generations() {
                 <ul>
                     {generations?.map((gen, index) => (
                         <li key={index}>
-                            <h2>{formatString(gen.name)}</h2>
-                            <span>{formatString(gen?.main_region?.name)}</span>
-                            <PokemonList pokemonListProp={gen?.pokemon_species}/>
+                            <div>
+                                <h2>{formatString(gen.name)}</h2>
+                                <span>{formatString(gen?.main_region?.name)}</span>
+                                <div className='badge-list'>
+                                    {gen.versions.map((version, i) => (
+                                        version.versions.map(v => (
+                                            <span key={i} className='badge'>{formatString(v.name)}</span>
+                                        ))
+                                    ))}
+                                </div>
+                            </div>
+                            <PokemonList pokemonListProp={gen?.pokemon_species} limit={10} />
                         </li>
-                    ))} 
+                    ))}
                 </ul>
             </section>
         </Wrapper>

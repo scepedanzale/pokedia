@@ -50,8 +50,6 @@ export default function PokemonList({ pokemonListProp, limit }) {
         }
     };
 
-    console.log('PROPSS', pokemonListProp)
-
     useEffect(() => {
         const handleScroll = () => setScrollY(window.scrollY);
 
