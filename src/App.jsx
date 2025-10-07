@@ -11,9 +11,9 @@ import SingleRegion from './pages/SingleRegion';
 import ScrollToTop from './components/layout/ScrollToTop';
 import SingleLocation from './pages/SingleLocation';
 import Maintenance from './pages/Maintenance';
-import Generations from './pages/Generations';
 import Favourites from './pages/Favourites';
 import SingleHabitat from './pages/SingleHabitat';
+import Versions from './pages/Versions';
 
 function App() {
 
@@ -28,13 +28,14 @@ function App() {
           <Route path='/types' element={<Types />} />
           <Route path='/types/:type_name' element={<SingleType />} />
           <Route path="/types/:type_name/*" element={<NotFoundPage />} />
+
           <Route path='/regions' element={<WorldMap />} />
           <Route path='/regions/:region_name' element={<SingleRegion />} />
           <Route path='/regions/:region_name/:location_name' element={<SingleLocation />} />
           <Route path='/regions/habitat/:habitat_name' element={<SingleHabitat/>}/>
+          
           <Route path='/moves' element={<Maintenance />} />
-          <Route path='/generations' element={<Generations />} />
-          <Route path='/games' element={<Maintenance />} />
+          <Route path='/versions' element={<Versions />} />
           <Route path='/favourites' element={<Favourites/>}/>
           <Route path='*' element={<NotFoundPage />} />
         </Routes>

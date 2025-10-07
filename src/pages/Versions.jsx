@@ -7,8 +7,9 @@ import { fetchData } from '../utils/api';
 import Loader from '../components/Loader';
 import Error from '../components/Error';
 import PokemonList from '../components/pokemon/PokemonList';
+import { Link } from 'react-router-dom';
 
-export default function Generations() {
+export default function Versions() {
 
     const [generations, setGenerations] = useState([]);
     const [error, setError] = useState(false);
@@ -59,14 +60,18 @@ export default function Generations() {
             <Breadcrumb />
             {loader && <Loader />}
             {error && <Error />}
-            <section>
-                <h1>Generations</h1>
+            <section id='versions'>
+                <h1>Versions</h1>
                 <ul>
                     {generations?.map((gen, index) => (
                         <li key={index}>
-                            <div>
-                                <h2>{formatString(gen.name)}</h2>
-                                <span>{formatString(gen?.main_region?.name)}</span>
+                            <h2>{formatString(gen.name)}</h2>
+                            <div className='version-detail'>
+                                <h3>Region: </h3>
+                                <Link to={`/regions/${gen.main_region.name}`}>{formatString(gen?.main_region?.name)}</Link>
+                            </div>
+                            <div className='version-detail'>
+                                <h3>Games: </h3>
                                 <div className='badge-list'>
                                     {gen.versions.map((version, i) => (
                                         version.versions.map(v => (
