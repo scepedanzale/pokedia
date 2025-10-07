@@ -70,6 +70,7 @@ export default function Versions() {
                                 <h3>Region: </h3>
                                 <Link to={`/regions/${gen.main_region.name}`}>{formatString(gen?.main_region?.name)}</Link>
                             </div>
+
                             <div className='version-detail'>
                                 <h3>Games: </h3>
                                 <div className='badge-list'>
@@ -80,6 +81,17 @@ export default function Versions() {
                                     ))}
                                 </div>
                             </div>
+
+                            {gen.types.length > 0 &&
+                                <div className='version-detail'>
+                                    <h3>New Types: </h3>
+                                    <div className='badge-list'>
+                                        {gen.types.map((type, i) => (
+                                            <Link key={i} to={`/types/${type.name}`} className={`type ${type.name}`}>{formatString(type.name)}</Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            }
                             <PokemonList pokemonListProp={gen?.pokemon_species} limit={10} />
                         </li>
                     ))}
