@@ -17,7 +17,7 @@ export default function Navbar() {
   return (
     <nav>
       <Link className='navbar-brand' to="/">
-        <img id='logo' src='./imgs/logo.png' />
+        <img id='logo' src='/imgs/logo.png' />
       </Link>
 
       <button
