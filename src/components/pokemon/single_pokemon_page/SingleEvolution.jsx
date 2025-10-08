@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { urlSinglePokemon } from '../../../config/config';
 import { formatPokemonName } from '../../../utils/string';
-import { evolutionDetailsMap } from '../../../constants/evolutionDetailsMap';
+import { evolutionDetailsMap } from '../../../data/evolutionDetailsMap';
 
 export default function SingleEvolution({ evolution, currentPokemonName, numEvolution }) {
 

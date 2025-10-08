@@ -2,32 +2,30 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import axios from 'axios';
 import { urlTypes } from '../../config/config';
-import { typeImages } from '../../config/types';
 import PokemonList from '../pokemon/PokemonList';
 import Breadcrumb from '../Breadcrumb';
 import Wrapper from '../layout/Wrapper';
 import { formatString } from '../../utils/string';
 import Loader from '../ui/Loader';
 import Error from '../ui/Error';
+import { pokemonTypes } from '../../data/pokemonTypes';
 
 export default function SingleType() {
 
     const { type_name } = useParams();
 
-    const urlType = location.state?.urlType || null;
-
     const [type, setType] = useState({})
-    const [typeImg, setTypeImg] = useState('')
+    const [typeImg, setTypeImg] = useState('');
 
     const [loader, setLoader] = useState(false);
     const [error, setError] = useState(false);
 
     useEffect(() => {
         setLoader(true);
-        axios(urlType ?? `${urlTypes}${type_name}`)
+        axios(`${urlTypes}${type_name}`)
             .then((response) => {
                 setType(response.data);
-                setLoader(false);
+                setTypeImg(pokemonTypes.find(t => t.name === response.data.name))
             })
             .catch((error) => {
                 console.error('Errore fetch tipo:', error);
@@ -36,12 +34,7 @@ export default function SingleType() {
             .finally(() => {
                 setLoader(false);
             });
-    }, [urlType, type_name]);
-
-    useEffect(() => {
-        setTypeImg(typeImages[type?.name])
-    }, [type])
-
+    }, [type_name]);
 
 
     return (
@@ -52,7 +45,7 @@ export default function SingleType() {
                 <div id='type-page'>
                     <Breadcrumb />
                     <header>
-                        <img src={typeImg} />
+                        <img src={typeImg.icon} />
 
                         <div className="intro">
                             <h1>{formatString(type.name)}</h1>
