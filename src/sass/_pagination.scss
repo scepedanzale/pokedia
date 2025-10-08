@@ -6,12 +6,16 @@
     align-items: center;
     gap: 1em;
     button{
+        cursor: pointer;
         border: 0;
         font-size: 1em;
-        cursor: pointer;
+        color: var(--primary-color);
         &:hover{
             color: var(--secondary-color);
         }
+        &:disabled{
+        color: grey;
+    }
     }
     .arrow-pagination{
         display: flex;
@@ -19,6 +23,9 @@
     }
     .active{
         color: var(--secondary-color);
+        background-color: var(--primary-color);
+        padding: 5px;
+        border-radius: 5px;
         font-weight: bold;
     }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import PokemonCard from "./PokemonCard";
+import PokemonList from "./PokemonList";
 
 export default function SearchPokemon({ pokemonList, setError, setLoader }) {
   const inputField = useRef();
@@ -54,14 +55,13 @@ export default function SearchPokemon({ pokemonList, setError, setLoader }) {
           <IoIosSearch />
         </span>
       </div>
+      <div className="filters-container">
+        
+      </div>
       {pokemonSearched.length > 0 &&
         <section id="searched">
           <h2>Results: {pokemonSearched.length}</h2>
-          <div className="pokemon-list">
-            {pokemonSearched && pokemonSearched.map((p, index) => (
-              <PokemonCard key={index} pokemon={p?.pokemon ?? p} />
-            ))}
-          </div>
+          <PokemonList pokemonListProp={pokemonSearched} limit={10}/>
         </section>
       }
     </>

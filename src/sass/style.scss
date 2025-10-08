@@ -40,6 +40,7 @@ button, a, [role="button"], input, label {
     --bg-color: #f2f2f2;
     --primary-color: #1c4054;
     --secondary-color: #e6b260;
+    --box-color: #cbcbcb;
     --font-title: "Bangers", system-ui;
     --font-text: "Comic Neue", cursive;
 }
@@ -144,7 +145,7 @@ h2 {
 }
 
 .badge {
-    backdrop-filter: brightness(0.9);
+    background-color: var(--box-color);
     width: max-content;
     padding: 5px;
     border-radius: 5px;
