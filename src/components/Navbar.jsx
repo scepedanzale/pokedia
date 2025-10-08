@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
 import { TbPokeball } from "react-icons/tb";
-import logo from '../imgs/logo.png'
 import { BsController, BsDisc, BsGeoAlt, BsHouse, BsListUl, BsStar } from "react-icons/bs";
 
 
@@ -8,11 +7,10 @@ export default function Navbar() {
 
   const location = useLocation();
 
-
   return (
     <nav>
       <Link className='navbar-brand' to="/">
-        <img id='logo' src={logo} />
+        <img id='logo' src='./imgs/logo.png' />
       </Link>
       <label htmlFor='toggle-menu'><TbPokeball /></label>
       <input type="checkbox" id='toggle-menu' />
