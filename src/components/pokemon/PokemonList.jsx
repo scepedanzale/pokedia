@@ -9,7 +9,7 @@ import { getWithExpiry, saveWithExpiry } from '../../utils/storage';
 import Loader from '../ui/Loader';
 import Error from '../ui/Error';
 
-export default function PokemonList({ pokemonListProp, limit }) {
+export default function PokemonList({ pokemonListProp, limit, queryParam }) {
 
     const [loader, setLoader] = useState(false);
     const [error, setError] = useState(false);
@@ -65,7 +65,12 @@ export default function PokemonList({ pokemonListProp, limit }) {
             </section>
             {/* Paginazione */}
             {pokemonList.length > 0 ?
-                <Pagination recordSet={pokemonList} setVisibleList={(data) => setVisiblePokemon(data)} limit={limit} />
+                <Pagination
+                    recordSet={pokemonList}
+                    setVisibleList={(data) => setVisiblePokemon(data)}
+                    limit={limit}
+                    queryParam={queryParam}
+                />
                 :
                 <p>Pokémon not found</p>
             }

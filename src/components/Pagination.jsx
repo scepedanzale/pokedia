@@ -1,19 +1,31 @@
 import { useEffect, useMemo, useState } from 'react'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import { useSearchParams } from 'react-router-dom';
 
-export default function Pagination({ recordSet, setVisibleList, limit }) {
+export default function Pagination({ recordSet, setVisibleList, limit, queryParam }) {
+    const param = queryParam || "page";
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const initialPage = parseInt(searchParams.get(param)) || 1;
+    const [currentPage, setCurrentPage] = useState(initialPage);
+
     const NAV_LIMIT_DEFAULT = 5;
-    const [currentPage, setCurrentPage] = useState(1);
-
     const pageLimit = limit || 20; // quanti dati
     const totalPages = Math.ceil(recordSet.length / pageLimit);
+
 
     const pageOffset = (currentPage - 1) * pageLimit; // dove inizia
     const end = pageOffset + pageLimit; // dove finisce
 
     const pageRecords = useMemo(() => recordSet.slice(pageOffset, end), [recordSet, pageOffset, end]);  // calcolo records da mostrare
 
-    useEffect(() => setVisibleList(pageRecords), [pageOffset, recordSet, pageRecords])  // aggiorno padre
+    useEffect(() => setVisibleList(pageRecords), [pageRecords])  // aggiorno padre
+
+    // Aggiorno la query string nell'URL quando cambia pagina
+    useEffect(() => {
+        searchParams.set(param, currentPage);
+        setSearchParams(searchParams);
+    }, [currentPage, queryParam, searchParams, setSearchParams]);
 
     const range = useMemo(() => {
         const max = Math.min(NAV_LIMIT_DEFAULT, totalPages);    // 

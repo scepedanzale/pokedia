@@ -92,7 +92,11 @@ export default function Versions() {
                                     </div>
                                 </div>
                             }
-                            <PokemonList pokemonListProp={gen?.pokemon_species} limit={10} />
+                            <PokemonList
+                                pokemonListProp={gen?.pokemon_species}
+                                limit={10}
+                                queryParam={`gen${index + 1}-page`}
+                            />
                         </li>
                     ))}
                 </ul>
