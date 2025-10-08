@@ -21,6 +21,14 @@
     padding: 0;
 }
 
+button{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+}
+
 /* Rimuove il flash grigio/blu su tap nei browser mobile */
 button, a, [role="button"], input, label {
   -webkit-tap-highlight-color: transparent; 

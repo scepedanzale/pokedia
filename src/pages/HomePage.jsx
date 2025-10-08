@@ -6,8 +6,8 @@ export default function HomePage() {
     return (
         <>
             <Wrapper>
-                <h1>Welcome in PokédiA</h1>
-                <p>Explore the Pokémon world!</p>
+                <h1>Welcome to PokédiA</h1>
+                <p>Explore the Pokémon World!</p>
                 <PokemonList limit={50} />
             </Wrapper>
         </>

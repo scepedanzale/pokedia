@@ -1,20 +1,35 @@
 import { Link, useLocation } from 'react-router-dom'
 import { TbPokeball } from "react-icons/tb";
 import { BsController, BsDisc, BsGeoAlt, BsHouse, BsListUl, BsStar } from "react-icons/bs";
+import { useEffect, useState } from 'react';
 
 
 export default function Navbar() {
 
   const location = useLocation();
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname])
+
   return (
     <nav>
       <Link className='navbar-brand' to="/">
         <img id='logo' src='./imgs/logo.png' />
       </Link>
-      <label htmlFor='toggle-menu'><TbPokeball /></label>
-      <input type="checkbox" id='toggle-menu' />
-      <ul>
+
+      <button
+        className="menu-toggle"
+        onClick={() => setIsOpen(prev => !prev)}
+        aria-expanded={isOpen}
+        aria-controls="nav-menu"
+      >
+        <TbPokeball />
+      </button>
+
+      <ul className={isOpen ? 'open' : ''}>
         <li>
           <Link to="/" className={location.pathname == '/' && 'active'}>
             <BsHouse />
@@ -28,7 +43,7 @@ export default function Navbar() {
         </li>
         <li>
           <Link to="/moves" className={location.pathname.includes('moves') && 'active'}>
-            <BsDisc/>
+            <BsDisc />
             <span>Moves</span></Link>
         </li>
         <li>
@@ -42,8 +57,7 @@ export default function Navbar() {
             <span>Versions</span></Link>
         </li>
 
-
-        <li className='button'>
+        <li>
           <Link to="/favourites" className={location.pathname.includes('favourites') && 'active'}>
             <BsStar />
             <span>Favourites</span></Link>

@@ -1,4 +1,5 @@
 
+
 nav {
     z-index: 100;
     position: fixed;
@@ -18,7 +19,7 @@ nav {
         max-width: 100px;
     }
 
-    label {
+    .menu-toggle {
         cursor: pointer;
         font-size: 2em;
         color: var(--primary-color);
@@ -44,56 +45,52 @@ nav {
 
         li {
             display: none;
-            &:hover a{
-               color: var(--secondary-color);
+
+            &:hover a {
+                color: var(--secondary-color);
             }
+
             a {
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                &.active{
+
+                &.active {
                     color: var(--secondary-color);
                 }
             }
-
-            svg {
-                height: max-content;
-                max-width: 20px;
-                line-height: none;
-            }
         }
 
-        .button {
-            margin-top: 1em;
+        hr {
+            margin: 1em 0;
+            width: 50%;
+        }
+    }
+    ul.open {
+        width: 100%;
+        opacity: 1;
+    
+        li {
+            display: flex;
         }
     }
 }
 
-#toggle-menu {
-    display: none;
-}
-
-#toggle-menu:checked+ul {
-    opacity: 1;
-    width: 100%;
-    li{
-        display: flex;
-    }
-}
 
 /* ver desktop */
 @media (min-width: 768px) {
-    
 
     nav ul {
         opacity: 1;
         width: 60px;
+        max-width: 60px;
         align-items: center;
         gap: 2em;
         overflow: hidden;
 
         li {
             display: flex;
+
             img {
                 max-width: 25px;
             }
@@ -108,13 +105,12 @@ nav {
             padding: 5px;
         }
     }
-
-    #toggle-menu:checked+ul {
+    ul.open{
         opacity: 1;
         width: 20%;
         max-width: 250px;
         align-items: start;
-
+    
         li span {
             display: block;
         }
