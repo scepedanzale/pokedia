@@ -20,27 +20,22 @@ export default function SinglePokemon() {
   const { id } = useParams();
 
   const [currentPokemon, setCurrentPokemon] = useState(singlePokemon || {});
-
   const [specie, setSpecie] = useState({});
 
-
   useEffect(() => {
-    setCurrentPokemon(singlePokemon)
-  }, [singlePokemon])
-
-  useEffect(() => {
-    if (!singlePokemon) {
+    if(singlePokemon) setCurrentPokemon(singlePokemon);
+    else{   // se viene da url
       axios(urlSinglePokemon + id)
         .then(response => {
           setCurrentPokemon(response.data)
         })
     }
-  }, [id])
+  }, [singlePokemon, id])
 
-
+  
   useEffect(() => {
     if (currentPokemon?.species) {
-      axios.get(currentPokemon.species.url)
+      axios(currentPokemon.species.url)
         .then(response => {
           setSpecie(response.data);
         })
@@ -53,7 +48,7 @@ export default function SinglePokemon() {
     currentPokemon?.name && specie &&
     <>
       <Wrapper>
-      <PreNextPokemon currentPokemon={currentPokemon} />
+        <PreNextPokemon currentPokemon={currentPokemon} />
 
         <div id='pokemon-page'>
 
