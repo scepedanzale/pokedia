@@ -1,4 +1,5 @@
 
+/* -------------------------- Barra di ricerca */
 .search-container{
     width: 100%;
     display: flex;
@@ -33,4 +34,12 @@ span.collapse{
     width: 0;
     padding: 0;
     overflow: hidden;
+}
+
+
+/* ---------------------------------- Sezione risultati */
+#searched{
+    background-color: var(--secondary-color);
+    padding: 0.5em;
+    border-radius: 5px;
 }

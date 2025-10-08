@@ -49,7 +49,6 @@ export default function PokemonList({ pokemonListProp, limit }) {
         <Wrapper>
             {!pokemonListProp && <SearchPokemon
                 pokemonList={pokemonList}
-                onChange={setVisiblePokemon}
                 setError={setError}
                 setLoader={setLoader}
             />}
@@ -58,7 +57,7 @@ export default function PokemonList({ pokemonListProp, limit }) {
             {error && <Error />}
             {/* Lista pokemon */}
             <section>
-                <div id='pokemon-list'>
+                <div className='pokemon-list'>
                     {visiblePokemon && visiblePokemon.map((p, index) => (
                         <PokemonCard key={index} pokemon={p?.pokemon ?? p} />
                     ))}
