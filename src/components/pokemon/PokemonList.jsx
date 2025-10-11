@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
-import { urlAllPokemon } from '../../config/config'
 import PokemonCard from './PokemonCard';
 import SearchPokemon from './SearchPokemon';
 import Wrapper from '../layout/Wrapper';
 import Pagination from '../Pagination';
-import { fetchData } from '../../utils/api';
-import { getWithExpiry, saveWithExpiry } from '../../utils/storage';
 import Loader from '../ui/Loader';
 import Error from '../ui/Error';
+import axios from 'axios';
 
 export default function PokemonList({ pokemonListProp, limit, queryParam }) {
 
@@ -15,34 +13,49 @@ export default function PokemonList({ pokemonListProp, limit, queryParam }) {
     const [error, setError] = useState(false);
 
     const [pokemonList, setPokemonList] = useState([]); // lista pokemon
-    const [visiblePokemon, setVisiblePokemon] = useState([]); // Pokémon mostrati
 
+    const [totalCount, setTotalCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    // chiamata back
+    const fetchPage = async (page = 1, limit = 50, filters = {}) => {
+        try {
+            const offset = (page - 1) * limit;
+            const params = { limit, offset, ...filters };
+            const res = await axios.get('http://localhost:5000/pokemon', { params });
+
+            return {
+                data: res.data.results,   // Pokémon della pagina
+                total: res.data.total     // totale Pokémon lato server
+            };
+        } catch (err) {
+            console.error('Errore fetchPage:', err);
+            return { data: [], total: 0 };
+        }
+    };
 
     useEffect(() => {
-        const loadPokemon = () => {
+        const loadPokemon = async () => {
             setLoader(true);
-            setVisiblePokemon([]);
-            if (pokemonListProp) setPokemonList(pokemonListProp);   // controllo se c'è lista da prop
+            if (pokemonListProp) {
+                setPokemonList(pokemonListProp);   // controllo se c'è lista da prop
+                setLoader(false);
+            }
             else {
-                const stored = getWithExpiry('pokemonList');
-                if (stored) setPokemonList(stored); // controllo se in localstorage
-                else {
-                    fetchData(urlAllPokemon + '?limit=10000')   // chiamata
-                        .then(response => {
-                            setPokemonList(response.results);
-                            saveWithExpiry('pokemonList', response.results);
-                        })
-                        .catch(error => {
-                            console.error(error);
-                            setError(true);
-                        });
+                try {
+                    const { data, total } = await fetchPage(currentPage, limit);
+                    setPokemonList(data);
+                    setTotalCount(total);
+                } catch (err) {
+                    console.log(err)
+                }finally{
+                    setLoader(false)
                 }
             }
-            setLoader(false);
         }
 
         loadPokemon();
-    }, [pokemonListProp]);
+    }, [pokemonListProp, currentPage, limit]);
 
 
     return (
@@ -58,18 +71,18 @@ export default function PokemonList({ pokemonListProp, limit, queryParam }) {
             {/* Lista pokemon */}
             <section>
                 <div className='pokemon-list'>
-                    {visiblePokemon && visiblePokemon.map((p, index) => (
-                        <PokemonCard key={index} pokemon={p?.pokemon ?? p} />
+                    {pokemonList.map((p, index) => (
+                        <PokemonCard key={index} pokemon={p} />
                     ))}
                 </div>
             </section>
             {/* Paginazione */}
-            {pokemonList.length > 0 ?
+            {pokemonList?.length > 0 ?
                 <Pagination
-                    recordSet={pokemonList}
-                    setVisibleList={(data) => setVisiblePokemon(data)}
                     limit={limit}
+                    totalCount={totalCount}
                     queryParam={queryParam}
+                    onPageChange={setCurrentPage}
                 />
                 :
                 <p>Pokémon not found</p>
