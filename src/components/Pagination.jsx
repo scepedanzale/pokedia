@@ -19,7 +19,7 @@ export default function Pagination({ limit, totalCount, queryParam, onPageChange
     }, [currentPage, queryParam, searchParams, setSearchParams]);
 
     const range = useMemo(() => {
-        const max = Math.min(NAV_LIMIT_DEFAULT, totalPages);    // 
+        const max = Math.min(NAV_LIMIT_DEFAULT, totalPages);    
         let s = Math.max(1, currentPage - Math.floor(max / 2)); // inizio: pagina minima 1
         let e = s + max - 1;    // fine: inizio + max n 
         if (e > totalPages) { e = totalPages; s = Math.max(1, e - max + 1); }

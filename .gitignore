@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 prog.txt
+
+backend/pokemon_slim.json

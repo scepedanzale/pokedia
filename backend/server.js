@@ -11,15 +11,28 @@ app.use(cors());
 const pokemonData = JSON.parse(fs.readFileSync('./pokemon_slim.json', 'utf8'));
 
 app.get('/pokemon', (req, res) => {
-    const { offset = '0', limit = '50', filters } = req.query;
+    const { offset = '0', pageLimit = '20', maxResults = '20', filters } = req.query;
 
     const offsetNum = parseInt(offset);
-    const limitNum = parseInt(limit);
+    const pageLimitNum = parseInt(pageLimit);
+    const maxResultsNum = parseInt(maxResults);
+
+    let filtersObj = {};
+    if (filters) {
+        try {
+            filtersObj = JSON.parse(filters);
+        } catch (err) {
+            console.warn('filters non valido:', filters);
+        }
+    }else console.log('NO FILTRI')
 
     let filtered = [...pokemonData];
     //filtri
+    if (filtersObj.name) filtered = filtered.filter(p => p?.name.toLowerCase().includes(filtersObj.name.toLowerCase()));
 
-    const paginated = filtered.slice(offsetNum, offsetNum + limitNum);
+    filtered = filtered.slice(0, maxResultsNum);
+
+    const paginated = filtered.slice(offsetNum, offsetNum + pageLimitNum);
 
     res.status(200).json({
         results: paginated,

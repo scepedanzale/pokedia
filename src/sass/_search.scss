@@ -1,13 +1,13 @@
-
 /* -------------------------- Barra di ricerca */
-.search-container{
+.search-container {
     width: 100%;
     display: flex;
     justify-content: end;
     position: sticky;
     top: 80px;
     z-index: 5;
-    input{
+
+    input {
         border: 1px solid var(--secondary-color);
         border-radius: 5px;
         width: 100%;
@@ -16,7 +16,8 @@
         transition: width 0.3s ease, padding 0.4s ease, border 0.4s ease;
         height: 40px;
     }
-    span{
+
+    span {
         line-height: 0;
         font-size: 1.5em;
         border-radius: 5px;
@@ -25,20 +26,84 @@
     }
 }
 
-input.collapse{
+input.collapse {
     width: 0;
     padding: 0;
     border: 0;
 }
-span.collapse{
+
+span.collapse {
     width: 0;
     padding: 0;
     overflow: hidden;
 }
 
 
+/* ---------------------------------- Filtri */
+
+.filters-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 130px;
+    z-index: 5;
+    margin-top: 10px;
+
+    .add-filters {
+        align-self: flex-end;
+        transition: max-height 0.3s ease, opacity 0.3s ease ;
+        overflow: hidden;
+        transition: width 0.3s ease;
+        white-space: nowrap;
+        span{
+            max-width: 100px;
+            opacity: 1;
+            transition: max-width 0.3s ease, opacity 0.2s ease;
+        }
+        svg{
+            font-size: 1.5em;
+            transition: transform 0.5s ease;
+        }
+    }
+    .add-filters.close{
+        span{
+            max-width: 0;
+            opacity: 0;
+        }
+        svg{
+            transform: rotate(45deg);
+        }
+    }
+    
+    // box
+    .filters {
+        max-height: 0;
+        opacity: 0;
+        width: 100%;
+        max-width: 992px;
+        margin: auto;
+        transition: max-height 0.3s ease, opacity 0.3s ease ;
+    }
+    .filter-group{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        max-width: 500px;
+        padding: 1em;
+    }
+    .filters.open {
+        max-height: 500px;
+        opacity: 1;
+    }
+    
+}
+
+
+
+
 /* ---------------------------------- Sezione risultati */
-#searched{
+#searched {
     background-color: var(--box-color);
     padding: 0.5em;
     border-radius: 5px;

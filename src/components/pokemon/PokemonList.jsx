@@ -5,7 +5,7 @@ import Wrapper from '../layout/Wrapper';
 import Pagination from '../Pagination';
 import Loader from '../ui/Loader';
 import Error from '../ui/Error';
-import axios from 'axios';
+import { fetchPage } from '../../utils/api';
 
 export default function PokemonList({ pokemonListProp, limit, queryParam }) {
 
@@ -17,23 +17,6 @@ export default function PokemonList({ pokemonListProp, limit, queryParam }) {
     const [totalCount, setTotalCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
-    // chiamata back
-    const fetchPage = async (page = 1, limit = 50, filters = {}) => {
-        try {
-            const offset = (page - 1) * limit;
-            const params = { limit, offset, ...filters };
-            const res = await axios.get('http://localhost:5000/pokemon', { params });
-
-            return {
-                data: res.data.results,   // Pokémon della pagina
-                total: res.data.total     // totale Pokémon lato server
-            };
-        } catch (err) {
-            console.error('Errore fetchPage:', err);
-            return { data: [], total: 0 };
-        }
-    };
-
     useEffect(() => {
         const loadPokemon = async () => {
             setLoader(true);
@@ -43,7 +26,7 @@ export default function PokemonList({ pokemonListProp, limit, queryParam }) {
             }
             else {
                 try {
-                    const { data, total } = await fetchPage(currentPage, limit);
+                    const { data, total } = await fetchPage({page: currentPage, pageLimit: limit, maxResults: 1000});
                     setPokemonList(data);
                     setTotalCount(total);
                 } catch (err) {
