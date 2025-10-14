@@ -8,7 +8,7 @@ export default function HomePage() {
             <Wrapper>
                 <h1>Welcome to PokédiA</h1>
                 <p>Explore the Pokémon World!</p>
-                <PokemonList limit={50} />
+                <PokemonList pageLimit={50} totalResults={10000} />
             </Wrapper>
         </>
     )

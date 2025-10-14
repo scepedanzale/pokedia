@@ -2,24 +2,39 @@ import { useEffect, useMemo, useState } from 'react'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from 'react-icons/md';
 import { useSearchParams } from 'react-router-dom';
 
-export default function Pagination({ limit, totalCount, queryParam, onPageChange }) {
-    const param = queryParam || "page"; 
-
+export default function Pagination({ pageLimit = 20, totalCount, queryParam = "page", onPageChange }) {
     const [searchParams, setSearchParams] = useSearchParams();
-    const initialPage = parseInt(searchParams.get(param)) || 1;
+
+    const initialPage = parseInt(searchParams.get(queryParam)) || 1;    // pag da url
     const [currentPage, setCurrentPage] = useState(initialPage);
 
     const NAV_LIMIT_DEFAULT = 5;    // numeri di pag mostrati
-    const totalPages = Math.ceil(totalCount / limit);   // num pag
+    const totalPages = Math.ceil(totalCount / pageLimit);   // num pag tot
+
+    useEffect(()=>{
+        console.log('QUERY', queryParam)
+        console.log('SEARCHPARAMS', searchParams)
+        console.log('INITIAL PAGE', initialPage)
+        console.log('TOTALPAG', totalPages)
+        console.log('PAGELIMIT', pageLimit)
+        console.log('TOTALCO', totalCount)
+    }, [searchParams, initialPage, queryParam, totalCount])
 
     // Aggiorno la query string nell'URL quando cambia pagina
     useEffect(() => {
-        searchParams.set(param, currentPage);
-        setSearchParams(searchParams);
-    }, [currentPage, queryParam, searchParams, setSearchParams]);
+        const currentParam = parseInt(searchParams.get(queryParam)) || 1;
+        if (currentParam !== currentPage) {
+            const newParams = new URLSearchParams(searchParams);
+            newParams.set(queryParam, currentPage);
+            setSearchParams(newParams, { replace: true }); 
+            onPageChange(currentPage)
+            console.log('OKKK')
+        }
+    }, [currentPage]);
+
 
     const range = useMemo(() => {
-        const max = Math.min(NAV_LIMIT_DEFAULT, totalPages);    
+        const max = Math.min(NAV_LIMIT_DEFAULT, totalPages);
         let s = Math.max(1, currentPage - Math.floor(max / 2)); // inizio: pagina minima 1
         let e = s + max - 1;    // fine: inizio + max n 
         if (e > totalPages) { e = totalPages; s = Math.max(1, e - max + 1); }
@@ -27,9 +42,7 @@ export default function Pagination({ limit, totalCount, queryParam, onPageChange
     }, [currentPage, totalPages]);
 
     const go = (num) => {
-        if (num < 1 || num > totalPages) return;
-        setCurrentPage(num);
-        onPageChange(num);
+        if (num >= 1 && num <= totalPages) setCurrentPage(num);
     }
 
     if (totalPages <= 1) return null

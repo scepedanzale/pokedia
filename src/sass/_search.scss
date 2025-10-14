@@ -83,6 +83,7 @@ span.collapse {
         width: 100%;
         max-width: 992px;
         margin: auto;
+        overflow: hidden;
         transition: max-height 0.3s ease, opacity 0.3s ease ;
     }
     .filter-group{

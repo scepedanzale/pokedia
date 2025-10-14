@@ -5,10 +5,9 @@ import { BsPlus, BsX } from "react-icons/bs";
 import { pokemonTypes } from "../../data/pokemonTypes";
 import { fetchPage } from "../../utils/api";
 
-export default function SearchPokemon({ pokemonList, setError, setLoader }) {
+export default function SearchPokemon({ setSearch, setFilters, setError, setLoader }) {
   const inputField = useRef();
   const [input, setInput] = useState('');
-  const [pokemonSearched, setPokemonSearched] = useState([]);
   const [filtersOpened, setFiltersOpened] = useState(false);
 
   useEffect(() => {
@@ -20,27 +19,11 @@ export default function SearchPokemon({ pokemonList, setError, setLoader }) {
   const [scrollY, setScrollY] = useState(window.scrollY);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoader(true);
-      try {
-        const searchedPokemon = await fetchPage({maxResults: 1000, filters: { name: input }});
-        setPokemonSearched(searchedPokemon.data)
+    if (input.length < 3) setSearch('');
+    else setSearch(input);
+  }, [input]);
 
-        /* setPokemonSearched(filtered) */
-      } catch (error) {
-        console.error(error);
-        setError(true);
-      } finally { setLoader(false) }
-    }
-
-    if (!input || !pokemonList || pokemonList.length === 0) return;
-
-    if (input.length < 3) setPokemonSearched([]);
-    if (input.length >= 3) fetchData();
-
-  }, [input, pokemonList]);
-
-  const handleInputCollapse = () => inputField.current?.classList.toggle('collapse');
+  const handleInputCollapse = () => inputField.current?.classList.toggle('collapse'); // collapse search bar
 
 
 
@@ -48,22 +31,32 @@ export default function SearchPokemon({ pokemonList, setError, setLoader }) {
   //                     FILTRI
   // ------------------------------------------------------
 
-  const [filterType, setFilterType] = useState([]);
+
+  /* const [filters, setFilters] = useState({}); */
+  /* 
+    {
+      generations: [1, 2, 3],
+      is_legendary: true,
+      types: [bug, ghost]
+    }
+  */
+  const [filterType, setFilterType] = useState([]); // types
+  const [totalCount, setTotalCount] = useState(0);  // n tot risultati
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
 
     setFilterType(prev => {
       if (checked) {
-        return [...prev, { filter: name, value }];
+        return [...prev, value];
       } else {
-        return prev.filter(f => !(f.filter === name && f.value === value));
+        return prev.filter(f => !(f === value));
       }
     })
   }
 
   const removeFilter = (element) => {
-    const newFilters = filterType.filter(f => f.value !== element.value);
+    const newFilters = filterType.filter(f => f !== element);
     setFilterType(newFilters);
   }
 
@@ -71,22 +64,12 @@ export default function SearchPokemon({ pokemonList, setError, setLoader }) {
     console.log('Filters updated:', filterType);
   }, [filterType]);
 
-  const applyFilters = () => {
-    const filtered = pokemonList.filter(pokemon => {
-      console.log(pokemon)  // -------------------- ritorna name + url
-      return filterType.every(f => {
-        if (f.filter === 'type') {
-          // pokemon.types è un array di oggetti { name: 'fire' } → controlliamo se include il tipo selezionato
-          return pokemon.types.some(t => t.name === f.value);
-        }
-        // altri filtri eventualmente
-        return true;
-      });
-    });
-
-    setPokemonSearched(filtered);
+  const applyFilters = async () => {
+    const filters = {
+      types: filterType
+    }
+    setFilters(filters);
   };
-
 
 
   return (
@@ -131,7 +114,7 @@ export default function SearchPokemon({ pokemonList, setError, setLoader }) {
                       name="type"
                       value={type.name}
                       onChange={handleChange}
-                      checked={filterType.some(f => f.filter === 'type' && f.value === type.name)}
+                      checked={filterType.some(f => f === type.name)}
                     />
                     {type.name}
                   </label>
@@ -151,7 +134,7 @@ export default function SearchPokemon({ pokemonList, setError, setLoader }) {
           <div className="applied-filters badge-list">
             {filterType.map((filter, i) => (
               <div key={i} className="badge">
-                {filter.value}
+                {filter}
                 <BsX onClick={() => removeFilter(filter)} />
               </div>
             ))}
@@ -163,15 +146,6 @@ export default function SearchPokemon({ pokemonList, setError, setLoader }) {
         {/* isLegendary */}
         {/* reset */}
       </div>
-
-
-      {/* risultati */}
-      {pokemonSearched.length > 0 &&
-        <section id="searched">
-          <h2>Results: {pokemonSearched.length}</h2>
-          <PokemonList pokemonListProp={pokemonSearched} limit={10} />
-        </section>
-      }
     </>
   )
 }

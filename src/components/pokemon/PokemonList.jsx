@@ -7,15 +7,24 @@ import Loader from '../ui/Loader';
 import Error from '../ui/Error';
 import { fetchPage } from '../../utils/api';
 
-export default function PokemonList({ pokemonListProp, limit, queryParam }) {
+export default function PokemonList({ pokemonListProp, pageLimit, totalResults, queryParam }) {
 
     const [loader, setLoader] = useState(false);
     const [error, setError] = useState(false);
 
     const [pokemonList, setPokemonList] = useState([]); // lista pokemon
 
-    const [totalCount, setTotalCount] = useState(0);
+    const [totalCount, setTotalCount] = useState(totalResults || 0);
     const [currentPage, setCurrentPage] = useState(1);
+
+    const [search, setSearch] = useState('');
+    const [filters, setFilters] = useState({});
+
+    useEffect(() => {
+        console.log('FILTRI', filters)
+        console.log('TOTAL RES', totalResults)
+        console.log('TOTAL COUNT', totalCount)
+    }, [totalResults, totalCount, filters])
 
     useEffect(() => {
         const loadPokemon = async () => {
@@ -24,27 +33,34 @@ export default function PokemonList({ pokemonListProp, limit, queryParam }) {
                 setPokemonList(pokemonListProp);   // controllo se c'è lista da prop
                 setLoader(false);
             }
-            else {
+            else {  
                 try {
-                    const { data, total } = await fetchPage({page: currentPage, pageLimit: limit, maxResults: 1000});
+                    const { data, total } = await fetchPage({
+                        page: currentPage,
+                        pageLimit,
+                        maxResults: totalResults,
+                        filters: { ...filters, name: search }
+                    });
+                    console.log('pokemonlist', data, total)
                     setPokemonList(data);
                     setTotalCount(total);
                 } catch (err) {
                     console.log(err)
-                }finally{
+                } finally {
                     setLoader(false)
                 }
             }
         }
 
         loadPokemon();
-    }, [pokemonListProp, currentPage, limit]);
+    }, [pokemonListProp, currentPage, pageLimit, search, filters]);
 
 
     return (
         <Wrapper>
             {!pokemonListProp && <SearchPokemon
-                pokemonList={pokemonList}
+                setSearch={setSearch}
+                setFilters={setFilters}
                 setError={setError}
                 setLoader={setLoader}
             />}
@@ -54,21 +70,22 @@ export default function PokemonList({ pokemonListProp, limit, queryParam }) {
             {/* Lista pokemon */}
             <section>
                 <div className='pokemon-list'>
-                    {pokemonList.map((p, index) => (
+                    {pokemonList.length > 0 && !loader ? pokemonList.map((p, index) => (
                         <PokemonCard key={index} pokemon={p} />
-                    ))}
+                    ))
+                        :
+                        <p>Pokémon not found</p>
+                    }
                 </div>
             </section>
             {/* Paginazione */}
-            {pokemonList?.length > 0 ?
+            {pokemonList?.length > 0 &&
                 <Pagination
-                    limit={limit}
+                    pageLimit={pageLimit}
                     totalCount={totalCount}
                     queryParam={queryParam}
                     onPageChange={setCurrentPage}
                 />
-                :
-                <p>Pokémon not found</p>
             }
         </Wrapper>
     )
