@@ -16,7 +16,6 @@ app.get('/pokemon', (req, res) => {
     const offsetNum = parseInt(offset);
     const pageLimitNum = parseInt(pageLimit);
     const maxResultsNum = parseInt(maxResults);
-    console.log('SERVER.JS', filters)
 
     let filtersObj = {};
     if (filters) {
@@ -37,6 +36,7 @@ app.get('/pokemon', (req, res) => {
             return filtersObj.types.some(type => pokemonTypes.includes(type));
         }); 
     }
+    if(filtersObj.is_legendary) filtered = filtered.filter(p => p?.specie?.is_legendary);
 
     filtered = filtered.slice(0, maxResultsNum);
 

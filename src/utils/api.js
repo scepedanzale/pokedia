@@ -19,6 +19,7 @@ export const fetchPage = async ({page = 1, pageLimit = 20, maxResults = 20, filt
         const offset = (page - 1) * pageLimit;
         const params = { offset, pageLimit, maxResults, filters: JSON.stringify(filters) };
         const res = await axios.get('http://localhost:5000/pokemon', { params });
+        console.log(filters, params)
 
         return {
             data: res.data.results,   // Pokémon della pagina

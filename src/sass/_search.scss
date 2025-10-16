@@ -50,7 +50,8 @@ span.collapse {
     z-index: 5;
     margin-top: 10px;
 
-    .add-filters {
+    // Add filters BTN
+    #add-filters {
         align-self: flex-end;
         transition: max-height 0.3s ease, opacity 0.3s ease ;
         overflow: hidden;
@@ -66,7 +67,7 @@ span.collapse {
             transition: transform 0.5s ease;
         }
     }
-    .add-filters.close{
+    #add-filters.close{
         span{
             max-width: 0;
             opacity: 0;
@@ -75,6 +76,16 @@ span.collapse {
             transform: rotate(45deg);
         }
     }
+    // Apply Reset BTN
+    #apply-reset-group-btn{
+        display: flex;
+        gap: 10px;
+    }
+    #apply-filters-btn, #reset-all-btn{
+        margin: 1em 0;
+        padding: 0.5em 2em;
+    }
+    
     
     // box
     .filters {
@@ -85,6 +96,16 @@ span.collapse {
         margin: auto;
         overflow: hidden;
         transition: max-height 0.3s ease, opacity 0.3s ease ;
+        ul li{
+            background-color: var(--box-color);
+            padding: 10px;
+            border-radius: 5px;
+            width: max-content;
+        }
+    }
+    .filters.open {
+        max-height: 500px;
+        opacity: 1;
     }
     .filter-group{
         display: flex;
@@ -92,21 +113,11 @@ span.collapse {
         gap: 10px;
         max-width: 500px;
         padding: 1em;
-    }
-    .filters.open {
-        max-height: 500px;
-        opacity: 1;
+        .filter{
+            display: flex;
+            align-items: center;
+            gap: 2px;        
+        }
     }
     
-}
-
-
-
-
-/* ---------------------------------- Sezione risultati */
-#searched {
-    background-color: var(--box-color);
-    padding: 0.5em;
-    border-radius: 5px;
-    margin-top: 1em;
 }
